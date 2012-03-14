@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Roomcheck::Application.config.secret_token = '3caef8dec0e9cf96bdd88285815c4b27ee28acee5fbf5f5ce158c956948e7bbea16df620d495f760ec3d8f3c2660596007da519ffebb885fcc86e564bf0f1208'
+Roomcheck::Application.config.secret_token = 'c093f1f688e7f5c029f2cf0208f3788546f07a5a8c7e8d19febe4a84cf63bee03b216d489ed40d70635fbde6b1e4ca59107428816033e9a0fd5c652554694082'
