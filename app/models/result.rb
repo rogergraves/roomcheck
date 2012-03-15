@@ -15,9 +15,9 @@ class Result < ActiveRecord::Base
       self.severity = 0
     end
 
-    # If a comment exists and severity is 0 or nill, set severity to 1
+    # If a comment exists and severity is 0 or nil, set severity to 1
     unless comment.nil?
-      if severity.nil? || severity > 0
+      if severity.nil? || severity == 0
         self.severity = 1
       end
     end
