@@ -1,5 +1,27 @@
 Roomcheck::Application.routes.draw do
   
+  get "results/new"
+
+  get "results/create"
+
+  get "results/edit"
+
+  get "results/update"
+
+  get "results/destroy"
+
+  get "results/show"
+
+  get "result/create"
+
+  get "result/new"
+
+  get "result/edit"
+
+  get "result/destroy"
+
+  get "result/show"
+
   get "unit/show"
 
   get "unit/new"
