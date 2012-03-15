@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe "check_list/index.html.erb" do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "viewing checklist items" do
+    it 'shows the list of checkitems' do
+      @allcheckitems = CheckItem.all
+    end
+  end
 end
