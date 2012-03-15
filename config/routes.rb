@@ -1,5 +1,11 @@
 Roomcheck::Application.routes.draw do
   
+  get "unit/show"
+
+  get "unit/new"
+
+  get "unit/delete"
+
   root :to => 'welcome#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
