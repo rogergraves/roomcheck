@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe UnitController do
+describe CheckListsController do
 
-  describe "GET 'show'" do
+  describe "GET 'index'" do
     it "returns http success" do
-      get 'show'
+      get 'index'
       response.should be_success
     end
   end
@@ -16,9 +16,16 @@ describe UnitController do
     end
   end
 
-  describe "GET 'delete'" do
+  describe "GET 'edit'" do
     it "returns http success" do
-      get 'delete'
+      get 'edit'
+      response.should be_success
+    end
+  end
+
+  describe "GET 'destroy'" do
+    it "returns http success" do
+      get 'destroy'
       response.should be_success
     end
   end

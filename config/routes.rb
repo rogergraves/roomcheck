@@ -1,12 +1,9 @@
 Roomcheck::Application.routes.draw do
   
-  get "unit/show"
+  resources :check_lists, :only => [ :index, :new, :edit, :destroy ]
+  resources :units, :only => [ :show, :new, :destroy ]
 
-  get "unit/new"
-
-  get "unit/delete"
-
-  root :to => 'welcome#index'
+  root :to => 'check_lists#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
