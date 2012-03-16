@@ -6,7 +6,7 @@ class ResultsController < ApplicationController
 
   def create
     @result = Result.new(params[:result])
-   # @result.save
+    redirect_to(new_result_path, :notice => "Saved") if @result.save
   end
 
   def edit

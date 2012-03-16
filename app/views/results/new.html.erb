@@ -1,20 +1,5 @@
 <h1>Results#new</h1>
 
-<%= form_for (@result) do |f| %>
+<%= render :partial => 'layouts/result' %>
 
-<% @result.errors.full_messages.each do |msg|  %>
-    <p><%= msg %></p>
-<% end %>
-
-<%= f.label :comment, 'Describe problem'  %>
-<%= f.text_field :comment %>
-<br/>
-<%= f.label :severity  %>
-<%= f.select :severity, options_for_select([["Negligible","1"], ["Minor","2"], ["Moderate","3"], ["Serious","4"], ["Emergency","5"]]) %>
-<br/>
-<%= f.hidden_field :unit_id %>
-<%= f.hidden_field :check_item_id %>
-
-<%= f.submit "Save" %>
-<% end %>
 
