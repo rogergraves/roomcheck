@@ -1,8 +1,12 @@
 class ResultsController < ApplicationController
   def new
+    logger.info "ResultsController.new called!!!!!"
+    @result = Result.new
   end
 
   def create
+    @result = Result.new(params[:result])
+   # @result.save
   end
 
   def edit
@@ -17,3 +21,12 @@ class ResultsController < ApplicationController
   def show
   end
 end
+
+# create_table "results", :force => true do |t|
+#   t.integer  "severity"
+#   t.string   "comment"
+#   t.integer  "unit_id"
+#   t.integer  "check_item_id"
+#   t.datetime "created_at",    :null => false
+#   t.datetime "updated_at",    :null => false
+# end

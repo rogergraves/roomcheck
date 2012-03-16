@@ -1,34 +1,20 @@
 Roomcheck::Application.routes.draw do
   
-  get "results/new"
-
-  get "results/create"
-
-  get "results/edit"
-
-  get "results/update"
-
-  get "results/destroy"
-
-  get "results/show"
-
-  get "result/create"
-
-  get "result/new"
-
-  get "result/edit"
-
-  get "result/destroy"
-
-  get "result/show"
+  resources :results
+  
+  # get "results/new"
+  # get "results/create"
+  # get "results/edit"
+  # get "results/update"
+  # get "results/destroy"
+  # get "results/show"
 
   get "unit/show"
-
   get "unit/new"
-
   get "unit/delete"
 
   root :to => 'welcome#index'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
