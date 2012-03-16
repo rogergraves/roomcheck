@@ -1,9 +1,10 @@
 <h1>Check List Items</h1>
 
-<ul>
+<ul id="check-list">
 	<% @checklists.each do |check_list| %>
 		<% check_list.check_items.each do |check_item| %>
-	  <li>
+	  <li>                   
+		  <input type="checkbox" />
 		  <%= check_item.name %>
 		</li>
 		<% end %>
