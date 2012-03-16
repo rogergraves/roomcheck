@@ -8,13 +8,18 @@ describe ResultsController do
   end
 
   it '#create: adds a new result' do
-    @valid_result = {
-      :unit_id => 3,
-      :check_item_id => 1
-    }
+    result = Result.new :unit_id => 3, :check_item_id => 1
+    result.should be_valid
+  end
 
-    post(:create, { :result => @valid_result})
-    assigns(:result).should be_new_record
+  it '#create: doesnt add a new result without unit_id' do
+    result = Result.new :check_item_id => 1
+    result.should_not be_valid
+  end
+
+  it '#create: doesnt add a new result without check_item_id' do
+    result = Result.new :unit_id => 3
+    result.should_not be_valid
   end
 
 

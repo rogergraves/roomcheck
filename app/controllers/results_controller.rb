@@ -2,6 +2,7 @@ class ResultsController < ApplicationController
   def new
     logger.info "ResultsController.new called!!!!!"
     @result = Result.new
+    #@resuls.check_item_id = params[:check_item_id]
   end
 
   def create
