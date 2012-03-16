@@ -12,3 +12,11 @@ class CheckItem < ActiveRecord::Base
   #   end
   # end
 end
+
+
+# create_table "check_items", :force => true do |t|
+#   t.string   "name"
+#   t.string   "area"
+#   t.datetime "created_at", :null => false
+#   t.datetime "updated_at", :null => false
+# end
