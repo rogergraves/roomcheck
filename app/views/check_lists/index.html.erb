@@ -1,0 +1,14 @@
+<h1>Check List Items</h1>
+
+<ul id="check-list">
+	<% @checklists.each do |check_list| %>
+	<% File.open("debug.txt","w") {|f| f.write(CheckItem.all.to_s)} %>
+		<% check_list.check_items.each do |check_item| %>
+	  <li>                   
+		  <input type="checkbox" />
+		  <%= check_item.name %>
+			<%= link_to "Edit", edit_check_item_path(check_item) %>
+		</li>
+		<% end %>
+	<% end %>
+</ul>
