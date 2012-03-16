@@ -17,10 +17,4 @@ describe "check_lists/index.html.erb", :type => :request do
     end
   end
   
-  it 'has an edit link' do
-    click_link 'Edit'
-    response.should have_selector('form') do
-      with_tag "input", :with => { :name => "check_item[name]"}
-    end
-  end
 end
