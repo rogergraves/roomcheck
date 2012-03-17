@@ -9,12 +9,6 @@ Roomcheck::Application.routes.draw do
   # get "results/destroy"
   # get "results/show"
 
-  get "unit/show"
-  get "unit/new"
-  get "unit/delete"
-
-  root :to => 'welcome#index'
-  
   resources :check_lists, :only => [ :index, :new, :edit, :destroy ]
   resources :units, :only => [ :show, :new, :destroy ]
   resources :check_items, :only => [ :new, :edit, :destroy ]
