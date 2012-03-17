@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe "New Check Item Page" do
+describe "check_items/new.html.erb" do
   before :each do
-    render new_check_item_path
+    render
   end
   
   it "has a title" do
