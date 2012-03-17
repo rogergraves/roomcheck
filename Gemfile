@@ -27,6 +27,7 @@ group :test do
   gem 'factory_girl_rails', '~> 1.7.0'
   gem "rspec2-rails-views-matchers", "~> 0.2.2"
   gem "capybara", "~> 1.1.2"
+  gem "launchy"
 end
 
 group :development do

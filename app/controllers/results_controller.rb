@@ -2,11 +2,30 @@ class ResultsController < ApplicationController
   def new
     logger.info "ResultsController.new called!!!!!"
     @result = Result.new
+    @result.check_item_id = params[:check_item_id]
+    @result.unit_id = params[:unit_id]
+    
+    # logger.info "ResultsController.new called!!!!!"
+    # @result = Result.find_by_check_item_id(params[:check_item_id])
+    # @result.check_item_id = params[:check_item_id]
+    # @result.unit_id = params[:unit_id]
+    # @result = Result.new if @result.nil?
+    # # Look for result_id that has check_item_id = @result.check_item_id && unit_id == @result.unit_id
+    # @result = Result.new if @result.nil?
   end
 
   def create
     @result = Result.new(params[:result])
-    redirect_to(new_result_path, :notice => "Saved") if @result.save
+    if @result.save
+      redirect_to(check_lists_path, :notice => "Saved")
+    else
+      errormessages = ""
+      @result.errors.full_messages.each do |e|
+        errormessages += ", " if errormessages.length > 0 
+        errormessages += e
+      end
+      redirect_to(check_lists_path, :notice => "Errors occurred: #{errormessages}")
+    end   
   end
 
   def edit
