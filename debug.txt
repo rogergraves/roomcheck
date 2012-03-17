@@ -1,1 +1,2 @@
 [#<CheckItem id: 1, name: "sink", area: "kitchen", created_at: "2012-03-14 21:43:01", updated_at: "2012-03-16 21:47:36", check_list_id: 1>, #<CheckItem id: 2, name: "light", area: "kitchen", created_at: "2012-03-14 22:46:52", updated_at: "2012-03-16 21:47:36", check_list_id: 1>, #<CheckItem id: 3, name: "check", area: "kitchen", created_at: "2012-03-14 22:48:20", updated_at: "2012-03-16 21:47:36", check_list_id: 1>]
+

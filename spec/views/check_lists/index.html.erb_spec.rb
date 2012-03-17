@@ -17,4 +17,8 @@ describe "check_lists/index.html.erb", :type => :request do
     end
   end
   
+  it "has an 'add item' button" do
+     rendered.should have_link ('Add Item')
+  end
+   
 end
