@@ -2,11 +2,6 @@ require 'spec_helper'
 
 describe ResultsController do
   
-  it '#new: http success' do
-    get(:new)
-     response.should be_success
-  end
-
   it '#create: adds a new result' do
     result = Result.new :unit_id => 3, :check_item_id => 1
     result.should be_valid
@@ -20,6 +15,15 @@ describe ResultsController do
   it '#create: doesnt add a new result without check_item_id' do
     result = Result.new :unit_id => 3
     result.should_not be_valid
+  end
+  
+  it '#update: updates an existing result when passed parameters' do
+    result = Result.new :unit_id => 3, :check_item_id => 1
+    result.save
+    result.unit_id = 4
+    result.save
+    
+    result.unit_id.should == 4
   end
 
 

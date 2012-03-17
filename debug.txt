@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 [#<CheckItem id: 1, name: "sink", area: "kitchen", created_at: "2012-03-14 21:43:01", updated_at: "2012-03-16 21:47:36", check_list_id: 1>, #<CheckItem id: 2, name: "light", area: "kitchen", created_at: "2012-03-14 22:46:52", updated_at: "2012-03-16 21:47:36", check_list_id: 1>, #<CheckItem id: 3, name: "check", area: "kitchen", created_at: "2012-03-14 22:48:20", updated_at: "2012-03-16 21:47:36", check_list_id: 1>]
+=======
+[#<CheckItem id: 1, name: "shower", area: nil, created_at: "2012-03-16 23:46:17", updated_at: "2012-03-16 23:46:17", check_list_id: 1>, #<CheckItem id: 2, name: "shower", area: nil, created_at: "2012-03-16 23:46:17", updated_at: "2012-03-16 23:46:17", check_list_id: 2>, #<CheckItem id: 3, name: "shower", area: nil, created_at: "2012-03-16 23:46:17", updated_at: "2012-03-16 23:46:17", check_list_id: 3>]
+>>>>>>> c101e7ee5e8296906abdd4414ce8894e01487e5d
