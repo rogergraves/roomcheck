@@ -17,8 +17,16 @@ describe "check_lists/index.html.erb", :type => :request do
     end
   end
   
-  it "has an 'add item' button" do
-     rendered.should have_link ('Add Item')
-  end
+    it "has an 'add item' button" do
+      rendered.should have_link ('Add Item')
+    end
+  
+  # context "when adding a new CheckItem" do
+  #    it "increases the number of listed items by one" do
+  #      expect {
+  #        post :create, Factory(:check_item)
+  #      }.to change(have_tag("li", :count => 4))
+  #    end
+  #  end
    
 end
