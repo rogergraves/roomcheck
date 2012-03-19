@@ -10,12 +10,16 @@ describe CheckItemsController do
   end
 
   describe "GET 'edit'" do
-    it "returns http success" do
-      get 'edit'
-      response.should be_success
-    end
+   it "should be able to rename the check_item" do
+     #make a check_item with the old name - CheckItem.create(:)
+     check_item = CheckItem.create(:name => 'old_name')
+     #post to /check_items/#{check_item.id} or check_items_edit_path(check_item), and attributes hash
+     put :update, :id => check_item.id, :check_item => { :name => 'blah'}
+     #check_item.reload and compare names
+     check_item.reload.name.should == 'blah'
+   end
   end
-
+   
   describe "GET 'destroy'" do
     it "returns http success" do
       get 'destroy'
@@ -51,3 +55,4 @@ describe CheckItemsController do
     end
   end
 end
+
