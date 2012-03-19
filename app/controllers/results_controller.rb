@@ -1,3 +1,5 @@
+
+
 class ResultsController < ApplicationController
   def new
     logger.info "ResultsController.new called!!!!!"
@@ -28,10 +30,22 @@ class ResultsController < ApplicationController
     end   
   end
 
-  def edit
+  def edit    
+    @result = Result.find_by_id(params[:id])
   end
 
   def update
+    @result = Result.find(params[:id])
+    if @result.update_attributes(params[:result])
+      redirect_to(check_lists_path, :notice => "Saved")
+    else
+      errormessages = ""
+      @result.errors.full_messages.each do |e|
+        errormessages += ", " if errormessages.length > 0 
+        errormessages += e
+      end
+      redirect_to(check_lists_path, :notice => "Errors occurred: #{errormessages}")
+    end
   end
 
   def destroy
