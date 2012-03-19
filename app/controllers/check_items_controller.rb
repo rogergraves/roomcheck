@@ -18,8 +18,15 @@ class CheckItemsController < ApplicationController
   end
 
   def edit
+    @check_item = CheckItem.find(params[:id])
+  end
+  
+  def update
+    @check_item = CheckItem.find(params[:id])
+    @check_item.update_attributes(params[:check_item]) ? redirect_to(check_lists_path, :notice => "Item Saved") : flash[:error]
   end
 
   def destroy
+    
   end
 end
