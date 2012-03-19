@@ -5,6 +5,7 @@
 		<% check_list.check_items.each do |check_item| %>
 	  <li>                   
 		  <input type="checkbox" />
+		  <%= check_list.id%>
 		  <%= check_item.name %>
 			<%= link_to "Edit", edit_check_item_path(check_item) %>
 		</li>
@@ -13,4 +14,4 @@
 </ul>
 <br/>
 <br/>
-<%= link_to "Add Item", new_check_item_path %>
+<%= link_to "Add Item", new_check_item_path(:check_list_id => @checklists.first.id)%>
