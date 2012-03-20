@@ -21,9 +21,10 @@ describe CheckItemsController do
   end
    
   describe "GET 'destroy'" do
-    it "returns http success" do
-      get 'destroy'
-      response.should be_success
+    it "should destroy an existing check_item" do
+      check_item = CheckItem.create(:name => 'old_name')
+      delete :destroy, :id => check_item.id
+      response.should redirect_to(check_lists_path)
     end
   end
   
