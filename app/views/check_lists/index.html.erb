@@ -5,7 +5,6 @@
 		<% check_list.check_items.each do |check_item| %>
 	  <li>                   
 		  <input type="checkbox" />
-		  <%= check_list.id%>
 		  <%= check_item.name %>
 		    <%= link_to_problem(check_item.id, check_item.check_list.unit_id) %>
 			<%= link_to "Edit", edit_check_item_path(check_item) %>
