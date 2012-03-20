@@ -1,3 +1,7 @@
-<h1>Edit Problem</h1>
+<h1>Edit Problem: <%= @result.check_item.name %></h1>
 
 <%= render :partial => 'layouts/result' %>
+
+<br />
+
+<%= link_to "Go back", check_list_path(@result.check_item.check_list.id) %>

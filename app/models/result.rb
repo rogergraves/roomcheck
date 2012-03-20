@@ -5,7 +5,7 @@ class Result < ActiveRecord::Base
   validates_inclusion_of :severity, :in => 1..5, :if => :comment?
   
 
-  #belongs_to :unit, :check_item
+  belongs_to :check_item
 
   before_validation :set_default_severity
   
