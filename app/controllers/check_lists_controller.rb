@@ -1,5 +1,9 @@
 class CheckListsController < ApplicationController
   def index
+   @units = Unit.all
+  end
+  
+  def show
    @checklists = CheckList.all
   end
 

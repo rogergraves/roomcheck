@@ -19,14 +19,15 @@ describe CheckItemsController do
      check_item.reload.name.should == 'blah'
    end
   end
-   
+
   describe "GET 'destroy'" do
-    it "returns http success" do
-      get 'destroy'
-      response.should be_success
+    it "should destroy an existing check_item" do
+      check_item = CheckItem.create(:name => 'old_name')
+      delete :destroy, :id => check_item.id
+      response.should redirect_to(check_lists_path)
     end
   end
-  
+
   describe '#create: adds a new check_item' do
     context "successful save" do
       let(:valid_item) do
@@ -41,13 +42,13 @@ describe CheckItemsController do
         post :create, valid_item
         response.should redirect_to(check_lists_path)
       end
-      
+
       it "adds a new check item" do
         expect {
           post :create, valid_item
         }.to change(CheckItem, :count).by(1)
       end
-              
+
       it "flashes a 'Saved' message" do
         post :create, valid_item
         flash[:notice].should == 'Item Saved'
@@ -55,4 +56,3 @@ describe CheckItemsController do
     end
   end
 end
-

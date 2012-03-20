@@ -1,25 +1,6 @@
 <h1>Add a New Item to Checklist</h1>
 <p></p>
 
-<%= form_for (@check_item) do |f| %>
-	<% @check_item.errors.full_messages.each do |msg| %>
-		<%= msg %>
-	<% end %>
-	<%= f.label :name, "Description of Task" %>
-	<%= f.text_field :name %>
-<br/>
-	<%= f.label :area, "Area" %>
-	<%= f.text_field :area %>
-<br/>	
-	<%= f.label :template_item, "Applies to all units?"  %>
-    <%= f.select :template_item, options_for_select([["No","false"], ["Yes","true"]], :selected => @check_item.template_item) %>
-	
-<% if @check_item.check_list_id %>
-	<%= f.hidden_field :check_list_id %>
-<% else %>
-	<%= f.text_field :check_list_id %>
-<% end %>
-<br/>
-	<%= f.submit "Save"%>
-<% end %>
+<%= render :partial => 'checkitem' %>
+
 

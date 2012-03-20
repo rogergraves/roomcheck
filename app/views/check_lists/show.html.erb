@@ -1,5 +1,4 @@
-<h1>Select Unit</h1>
-
+<h1>Check List Items</h1>
 
 <ul id="check-list">
 	<% @checklists.each do |check_list| %>
@@ -13,3 +12,7 @@
 		<% end %>
 	<% end %>
 </ul>
+<br/>
+<br/>
+
+<%= link_to "Add Item", new_check_item_path(:check_list_id => @checklists.first.id)%>
