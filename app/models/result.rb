@@ -1,12 +1,11 @@
 class Result < ActiveRecord::Base
-  validates :unit_id, :presence => true
   validates :check_item_id, :presence => true
   validates :severity, :presence => true
   validates_inclusion_of :severity, :in => 0..5
   validates_inclusion_of :severity, :in => 1..5, :if => :comment?
   
 
-  #belongs_to :unit, :check_item
+  belongs_to :check_item
 
   before_validation :set_default_severity
   

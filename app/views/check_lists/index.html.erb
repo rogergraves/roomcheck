@@ -1,5 +1,4 @@
-<h1>Check List Items</h1>
-
+<h1>Select CheckList</h1>
 
 <ul id="check-list">
 	<% @checklists.each do |check_list| %>
@@ -12,4 +11,6 @@
 		</li>
 		<% end %>
     <% end %>
+	  <li><%= link_to check_list.name, check_list_path(check_list) %></li>
+	<% end %>
 </ul>

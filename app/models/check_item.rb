@@ -2,6 +2,7 @@ class CheckItem < ActiveRecord::Base
   validates :name, :presence => true
   
   belongs_to :check_list
+  has_many :results
   # validates :name, :uniqueness => { :scope => :area }
   # 
   # validates_each :name do |record, attr, value|

@@ -1,5 +1,5 @@
 module CheckListHelper
-  
+
   def link_to_problem check_item_id
     result = Result.find_by_check_item_id(check_item_id)
     if result

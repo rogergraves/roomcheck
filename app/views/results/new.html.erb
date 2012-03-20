@@ -1,5 +1,9 @@
-<h1>Report Problem</h1>
+<h1>Report Problem: <%= @checkitem.name %></h1>
 
 <%= render :partial => 'layouts/result' %>
+
+<br />
+
+<%= link_to "Go back", check_list_path(@checkitem.check_list_id) %>
 
 
