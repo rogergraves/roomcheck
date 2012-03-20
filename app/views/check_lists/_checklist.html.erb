@@ -1,0 +1,9 @@
+<%= form_for (@check_list) do |f| %>
+	<% @check_list.errors.full_messages.each do |msg| %>
+		<%= msg %>
+	<% end %>
+	<%= f.label :name, "Unit name" %>
+	<%= f.text_field :name %>
+<br/>
+	<%= f.submit "Save"%>
+<% end %>
