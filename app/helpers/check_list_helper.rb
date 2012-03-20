@@ -1,7 +1,7 @@
 module CheckListHelper
   
-  def link_to_problem check_item_id, check_list_name=''
-    result = Result.find_by_check_item_id(check_item_id)
+  def link_to_problem check_item_id
+    result = Result.find_by_check_item_id_and_completed_on(check_item_id, nil)
     if result
       problem = result.comment[0..50]
       problem += '...' if problem != result.comment

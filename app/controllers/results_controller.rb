@@ -38,6 +38,11 @@ class ResultsController < ApplicationController
   end
 
   def destroy
+     @result = Result.find_by_id(params[:id])
+     @result.completed_on = Time.now
+     @result.save
+     
+     redirect_to(check_list_path(@result.check_item.check_list_id), :notice => "Problem solved")
   end
 
   def show
