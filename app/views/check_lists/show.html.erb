@@ -1,18 +1,15 @@
-<h1>Check List Items</h1>
+<h1><%= @check_list.name %></h1>
 
 <ul id="check-list">
-	<% @checklists.each do |check_list| %>
-		<% check_list.check_items.each do |check_item| %>
-	  <li>                   
-		  <input type="checkbox" />
-		  <%= check_item.name %>
-		    <%= link_to_problem(check_item.id, check_item.check_list.unit_id) %>
-			<%= link_to "Edit", edit_check_item_path(check_item) %>
-		</li>
-		<% end %>
+	<% @check_list.check_items.each do |check_item| %>
+	  <li>
+		<%= check_item.name %>
+	    <%= link_to_problem(check_item.id) %>
+		<%= link_to "Edit", edit_check_item_path(check_item) %>
+	  </li>
 	<% end %>
 </ul>
 <br/>
 <br/>
 
-<%= link_to "Add Item", new_check_item_path(:check_list_id => @checklists.first.id)%>
+<%= link_to "Add Item", new_check_item_path(:check_list_id => @check_list.id)%>

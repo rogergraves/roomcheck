@@ -2,7 +2,7 @@ Roomcheck::Application.routes.draw do
   
   resources :results
 
-  resources :check_lists, :only => [ :index, :new, :edit, :destroy, :show ]
+  resources :check_lists
   resources :units, :only => [ :show, :new, :destroy ]
   resources :check_items# :only => [ :new, :edit, :destroy ]
 
