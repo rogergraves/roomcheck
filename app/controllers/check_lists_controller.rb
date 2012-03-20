@@ -4,7 +4,9 @@ class CheckListsController < ApplicationController
   end
   
   def show
-   @checklists = CheckList.all
+    @checklist = CheckList.find(params[:id])
+    @checkitems = CheckItem.find_all_by_check_list_id(params[:id])
+    logger.info "DEBUG:::::#{@checklists.inspect}"
   end
 
   def new
