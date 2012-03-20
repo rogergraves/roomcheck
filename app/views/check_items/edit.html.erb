@@ -9,6 +9,9 @@
 <br/>
 	<%= f.label :area, "Area" %>
 	<%= f.text_field :area %>
+<br/>
+    <%= f.label :template_item, "Applies to all units?"  %>
+    <%= f.select :template_item, options_for_select([["No","false"], ["Yes","true"]], :selected => @check_item.template_item) %>
 	
 <% if @check_item.check_list_id %>
 	<%= f.hidden_field :check_list_id %>
