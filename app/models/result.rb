@@ -1,5 +1,4 @@
 class Result < ActiveRecord::Base
-  validates :unit_id, :presence => true
   validates :check_item_id, :presence => true
   validates :severity, :presence => true
   validates_inclusion_of :severity, :in => 0..5

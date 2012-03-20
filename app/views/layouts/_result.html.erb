@@ -10,7 +10,6 @@
 <%= f.label :severity  %>
 <%= f.select :severity, options_for_select([["No Problems","0"], ["Negligible","1"], ["Minor","2"], ["Moderate","3"], ["Serious","4"], ["Emergency","5"]], :selected => @result.severity) %>
 <br/>
-<%= f.hidden_field :unit_id %>
 <%= f.hidden_field :check_item_id %>
 
 <%= f.submit "Save" %>

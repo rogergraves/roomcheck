@@ -5,7 +5,6 @@ class ResultsController < ApplicationController
     logger.info "ResultsController.new called!!!!!"
     @result = Result.new
     @result.check_item_id = params[:check_item_id]
-    @result.unit_id = params[:unit_id]
     
     # logger.info "ResultsController.new called!!!!!"
     # @result = Result.find_by_check_item_id(params[:check_item_id])
