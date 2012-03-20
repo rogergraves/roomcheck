@@ -1,3 +1,5 @@
 <h1>Edit an Existing Item</h1>
 
 <%= render :partial => 'checkitem' %>
+
+<%= link_to "Delete", check_item_path(:check_item_id => @check_item.id), :method => 'DELETE', :confirm => 'Are you sure?' %>
