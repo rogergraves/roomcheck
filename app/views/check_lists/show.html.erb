@@ -4,7 +4,7 @@
 	<% @checkitems.each do |check_item| %>
 	  <li>                   
 		  <%= check_item.name %>
-		    <%= link_to_problem(check_item.id) %>
+		  <%= link_to_problem(check_item.id) %>
 			<%= link_to "Edit", edit_check_item_path(check_item) %>
 		</li>
 	<% end %>

@@ -27,4 +27,12 @@ class CheckItemsController < ApplicationController
     @check_item = CheckItem.find(params[:id])
     @check_item.destroy ? redirect_to(check_list_path(@check_item.check_list_id), :notice => "Item Deleted") : flash[:error]
   end
+  
+  def downorder
+    logger.info "DEBUG:::::: CheckItemsController#downorder CALLED!!!!!"
+  end
+
+  def uporder
+    logger.info "DEBUG:::::: CheckItemsController#uporder CALLED!!!!!"
+  end
 end
