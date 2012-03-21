@@ -2,7 +2,8 @@
 
 <ul id="check-list">
 	<% @checkitems.each do |check_item| %>
-	  <li>                   
+	  <li>  
+			<%= check_item.item_order %>
 		  <%= check_item.name %>
 		  <%= link_to_problem(check_item.id) %>
 			<%= link_to "Edit", edit_check_item_path(check_item) %>

@@ -2,7 +2,7 @@
 	<% @check_list.errors.full_messages.each do |msg| %>
 		<%= msg %>
 	<% end %>
-	<%= f.label :name, "Unit name" %>
+	<%= f.label :name, "Checklist name" %>
 	<%= f.text_field :name %>
 <br/>
 	<%= f.submit "Save"%>

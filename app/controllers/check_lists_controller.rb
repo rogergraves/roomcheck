@@ -7,13 +7,6 @@ class CheckListsController < ApplicationController
     @checklist = CheckList.find(params[:id])
     @checkitems = CheckItem.find_all_by_check_list_id(params[:id], :order => "item_order asc, id asc")
     
-    i = 1
-    @checkitems.each do |checkitem|
-      checkitem.item_order = i
-      i += 1
-      checkitem.save
-    end
-    
     logger.info "DEBUG:::::#{@checklists.inspect}"
   end
 
