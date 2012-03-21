@@ -20,6 +20,8 @@ class CheckItem < ActiveRecord::Base
       end
     end
 
+  def edit_item_order
+  end
 end
 
 
