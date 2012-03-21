@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- SQL XML created by WWW SQL Designer, http://code.google.com/p/wwwsqldesigner/ -->
+<!-- Active URL: http://socrates.devbootcamp.com/sql.html -->
+<sql>
+<datatypes db="sqlite">
+	<group label="Affinity">
+		<type label="Text" default="" length="1" sql="TEXT" quote="'" color="rgb(255,200,200)"/>
+		<type label="Numeric" default="0" length="0" sql="NUMERIC" quote="" color="rgb(238,238,170)"/>
+		<type label="Integer" default="0" length="0" sql="INTEGER" quote="" color="rgb(238,238,170)"/>
+		<type label="Real" default="0" length="0" sql="REAL" quote="" color="rgb(238,238,170)"/>
+		<type label="None" default="" length="0" sql="NONE" quote="" color="rgb(200,255,200)"/>
+	</group>
+</datatypes><table x="655" y="119" name="CheckItems">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="name" null="1" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>NULL</default></row>
+<row name="area" null="1" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>NULL</default></row>
+<row name="template_item" null="0" autoincrement="1">
+<datatype>TEXT</datatype>
+<default>'False'</default></row>
+<row name="check_list_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="CheckLists" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="899" y="43" name="Results">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="comment" null="1" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>NULL</default></row>
+<row name="severity" null="1" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>NULL</default></row>
+<row name="completed_on" null="1" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>NULL</default></row>
+<row name="check_item_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="CheckItems" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="917" y="324" name="CheckLists">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="name" null="1" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="736" y="511" name="Tasks">
+<row name="id" null="1" autoincrement="1">
+<datatype>TEXT</datatype>
+<default>NULL</default></row>
+<row name="Item_id" null="1" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>NULL</default><relation table="Items" row="id" />
+</row>
+<row name="Unit_id" null="1" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>NULL</default><relation table="Units" row="id" />
+</row>
+<row name="list_id" null="1" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>NULL</default><relation table="Lists" row="id" />
+</row>
+<row name="result_id" null="1" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>NULL</default><relation table="Results" row="id" />
+</row>
+<row name="problem_id" null="1" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>NULL</default><relation table="Problems" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="978" y="478" name="Items">
+<row name="id" null="1" autoincrement="1">
+<datatype>TEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="929" y="737" name="Results">
+<row name="id" null="1" autoincrement="1">
+<datatype>TEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="527" y="529" name="Lists">
+<row name="id" null="1" autoincrement="1">
+<datatype>TEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="537" y="745" name="Problems">
+<row name="id" null="1" autoincrement="1">
+<datatype>TEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="961" y="582" name="Units">
+<row name="id" null="1" autoincrement="1">
+<datatype>TEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+</sql>

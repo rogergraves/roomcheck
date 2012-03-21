@@ -1,0 +1,20 @@
+1. Check history of check item results (per room or per item)
+    Result->Find where completed_on is not null, sort by completed_on
+
+2. Assign users to problems
+    Add maintenance_user_id to Results
+
+3. Query example: See last time a smoke detector was checked in room X
+    a) result = CheckItems->Room # && name == "smoke", sort by completed_on
+
+4. Refresh/reset checklist (total reset)
+    Sort through Results and assign completed_on = Time.now
+
+5. Refresh/reset checklist (except for stuff that's not fixed)
+    Sort through results where severity == 0, assign completed_on = Time.now
+
+6. Track checkers user activity
+    Add checker_user_id and status to Results, status = 'not checked', 'assigned', etc.
+
+7. Check maintenance resolving activity (statistics)
+    Add maintenance_user_id to Results, Results->Query where user_id is maintenance person
