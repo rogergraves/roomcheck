@@ -1,14 +1,17 @@
-<h1>Check Items: <%= @checklist.name %></h1>
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "jquery.tablednd.js" %>
+<% end %>
 
-<ul id="check-list">
-	<% @checkitems.each do |check_item| %>
-	  <li>                   
-		  <%= check_item.name %>
-		    <%= link_to_problem(check_item.id) %>
-			<%= link_to "Edit", edit_check_item_path(check_item) %>
-		</li>
+
+<h1>Check Items: <%= @checklist.name %></h1>
+<table id="CheckItemTable" cellspacing='0' cellpadding='2'>
+	<% @checkitems.each do |check_item| %> 
+			<tr><td><%= check_item.item_order %></td>
+				<td><%= check_item.name %></td>
+		    <td><%= link_to_problem(check_item.id) %></td>
+			  <td><%= link_to "Edit", edit_check_item_path(check_item) %></td></tr>
 	<% end %>
-</ul>
+</table>
 <br/>
 <br/>
 

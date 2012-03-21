@@ -8,6 +8,31 @@ describe CheckItem do
       subject.errors[:name].should_not be_empty
     end
   end
+  
+  context "when checklist has no checkitems" do
+    it 'makes the item_order = 1' do
+      list = CheckList.create :name => "Test"
+      item = CheckItem.create :name => "Item", :check_list_id => list.id
+      item.item_order.should eq 1
+    end
+  end
+
+  context "when checklist has checkitems" do
+     it 'takes the highest item_order and increases it by 1' do
+       list = FactoryGirl.create(:check_list)
+       3.times do 
+         item = FactoryGirl.build(:check_item)
+         item.check_list_id = list.id
+         item.save
+         puts item.inspect
+       end
+       item = CheckItem.create :name => "Item", :check_list_id => list.id
+       item.item_order.should eq 4
+     end
+  end
+  
+  
+  #   
     # context "when area is nil" do
     #   it 'contains a unique name' do
     #     CheckItem.create! :name => 'sink'

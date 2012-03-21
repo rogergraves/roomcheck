@@ -1,0 +1,19 @@
+Work flow for creating a new CheckList
+
+1. Cloning existing room
+    a) Create new CheckList (user enters name -- room #)
+    b) Query CheckItem for cloned room
+    b) For each CheckItem in cloned room, create new CheckItem.new(check_list_id => something, name=>name, area=>area) for each one (insert new check_list_id)
+
+
+
+2. Template
+    a) Create new CheckList (user enters name -- room #)
+    b) Get list of CheckItemTemplate records
+    c) Create entry in CheckItem.new(check_list_id => something, name=>name, area=>area) for each one (insert new check_list_id)
+
+
+
+
+3. Blank slate
+    a) Create new CheckList (user enters name -- room #)

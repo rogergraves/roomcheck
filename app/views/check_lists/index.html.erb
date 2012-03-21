@@ -5,14 +5,6 @@
 <br/>
 <ul id="check-list">
 	<% @checklists.each do |check_list| %>
-	<li><%= link_to check_list.name, check_list_path(check_list) %></li>
-		<% check_list.check_items.each do |check_item| %>
-	  <li>                   
-		  <input type="checkbox" />
-		  <%= check_item.name %>
-		    <%= link_to_problem(check_item.id) %>
-			<%= link_to "Edit", edit_check_item_path(check_item) %>
-		</li>
-		<% end %>
+    	<li><%= link_to check_list.name, check_list_path(check_list) %></li>
     <% end %>
 </ul>

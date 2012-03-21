@@ -28,3 +28,12 @@ class CheckItemsController < ApplicationController
     @check_item.destroy ? redirect_to(check_list_path(@check_item.check_list_id), :notice => "Item Deleted") : flash[:error]
   end
 end
+
+
+
+
+# i = 1
+# @checkitems.each do |checkitem|
+#   checkitem.item_order = i
+#   i += 1
+#   checkitem.save
