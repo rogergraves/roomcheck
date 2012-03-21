@@ -1,16 +1,18 @@
-<h1>Select CheckList</h1>
-
+<h1>Checklists</h1>
+<br/>
+<%=link_to "Add Checklist", new_check_list_path %>
+<br/>
+<br/>
 <ul id="check-list">
 	<% @checklists.each do |check_list| %>
+	<li><%= link_to check_list.name, check_list_path(check_list) %></li>
 		<% check_list.check_items.each do |check_item| %>
 	  <li>                   
 		  <input type="checkbox" />
 		  <%= check_item.name %>
-		    <%= link_to_problem(check_item.id, check_item.check_list.unit_id) %>
+		    <%= link_to_problem(check_item.id) %>
 			<%= link_to "Edit", edit_check_item_path(check_item) %>
 		</li>
 		<% end %>
     <% end %>
-	  <li><%= link_to check_list.name, check_list_path(check_list) %></li>
-	<% end %>
 </ul>
