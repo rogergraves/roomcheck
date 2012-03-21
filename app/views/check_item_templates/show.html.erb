@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @check_item_template.name %>
+</p>
+
+<p>
+  <b>Area:</b>
+  <%= @check_item_template.area %>
+</p>
+
+<p>
+  <b>Item order:</b>
+  <%= @check_item_template.item_order %>
+</p>
+
+
+<%= link_to 'Edit', edit_check_item_template_path(@check_item_template) %> |
+<%= link_to 'Back', check_item_templates_path %>

@@ -14,6 +14,8 @@
 </table>
 <br/>
 <br/>
-
+<% if @checkitems.length == 0 && @checkitemtemplatescount > 0 %>
+    <%= link_to "Pre-populate Items", check_item_templates_clone_path(:check_list_id => params[:id])%><br />
+<% end %>
 <%= link_to "Add Item", new_check_item_path(:check_list_id => params[:id])%><br />
 <%= link_to "Go back", check_lists_path %>
