@@ -6,7 +6,7 @@
 	<%= f.text_field :name %>
 <br/>
 <%= f.label :add_template_items, "Add template items?"  %>
-<%= f.select :add_template_items, options_for_select([["No","false"], ["Yes","true"]]) %>
+<%= f.select :add_template_items, options_for_select([["No"], ["Yes"]]) %>
 <br/>
 	<%= f.submit "Save"%>
 <% end %>

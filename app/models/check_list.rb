@@ -15,13 +15,13 @@ class CheckList < ActiveRecord::Base
   attr_reader :add_template_items
   def add_template_items=(value)
    # @add_template_items = value
-    if value == true
+    if value == "Yes"
       CheckItem.all.each do |check_item|
         if check_item.template_item == true
+         
          self.check_items << check_item
         end
       end
     end
   end
-
 end
