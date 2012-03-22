@@ -2,6 +2,8 @@ class CheckList < ActiveRecord::Base
   validates :name, :presence => true
   has_many :check_items
 
+
+  scope :by_name, :order => "LOWER(name) ASC"
   # attr_reader :add_template_items
   # def add_template_items=(value)
   #  # @add_template_items = value

@@ -4,6 +4,8 @@ class CheckItem < ActiveRecord::Base
   belongs_to :check_list
   has_many :results
   
+  scope :by_item_order, :order => "item_order ASC, id ASC"
+  
   before_create :add_item_order
   
   def add_item_order

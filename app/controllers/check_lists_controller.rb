@@ -5,11 +5,9 @@ class CheckListsController < ApplicationController
   
   def show
     @checklist = CheckList.find(params[:id])
-    @checklists = CheckList.all
-    @checkitems = CheckItem.find_all_by_check_list_id(params[:id], :order => "item_order asc, id asc")
+    @checklists = CheckList.by_name.select { |check_list| check_list.check_items.count > 0 }
+    @checkitems = CheckItem.by_item_order.find_all_by_check_list_id(params[:id])
     @checkitemtemplatescount = CheckItemTemplate.count
-    
-    logger.info "DEBUG:::::#{@checklists.inspect}"
   end
 
   def new
