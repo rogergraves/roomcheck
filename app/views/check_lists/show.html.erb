@@ -16,6 +16,11 @@
 <br/>
 <% if @checkitems.length == 0 && @checkitemtemplatescount > 0 %>
     <%= link_to "Pre-populate Items", check_item_templates_clone_path(:check_list_id => params[:id])%><br />
+    <%= form_tag(check_list_clone_path, :method => :post) do |f| %>
+        Copy from: <%= select_tag "clone_check_list_id", options_from_collection_for_select(@checklists, "id", "name") %>
+        <%= hidden_field_tag 'check_list_id', params[:id] %>
+        <%= submit_tag "Clone" %>
+    <% end %>
 <% end %>
 <%= link_to "Add Item", new_check_item_path(:check_list_id => params[:id])%><br />
 <%= link_to "Go back", check_lists_path %>
