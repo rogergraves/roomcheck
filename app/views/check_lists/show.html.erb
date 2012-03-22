@@ -22,6 +22,6 @@
         <%= submit_tag "Clone" %>
     <% end %>
 <% end %>
-<%= link_to "Add Item", new_check_item_path(:check_list_id => params[:id])%><br />
+<%= link_to "Add Check Item", new_check_item_path(:check_list_id => params[:id])%><br />
 <%= link_to "Delete Room", check_list_path(:check_list_id => params[:id]), confirm: 'Are you sure?', method: :delete %><br />
 <%= link_to "Go back", check_lists_path %>
