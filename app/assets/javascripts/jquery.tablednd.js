@@ -154,6 +154,7 @@ jQuery.tableDnD = {
 	},
 	
 	initialiseDrag: function(dragObject, table, target, evnt, config) {
+		//alert("Need to find out target order here")
         jQuery.tableDnD.dragObject = dragObject;
         jQuery.tableDnD.currentTable = table;
         jQuery.tableDnD.mouseOffset = jQuery.tableDnD.getMouseOffset(target, evnt);

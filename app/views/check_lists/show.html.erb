@@ -1,17 +1,36 @@
-<% content_for :javascript_includes do %>
-  <%= javascript_include_tag "jquery.tablednd.js" %>
-<% end %>
-
-
 <h1>Check Items: <%= @checklist.name %></h1>
-<table id="CheckItemTable" cellspacing='0' cellpadding='2'>
+<table id="CheckItemTable" cellspacing='0' cellpadding='5'>
 	<% @checkitems.each do |check_item| %> 
-			<tr><td><%= check_item.item_order %></td>
-				<td><%= check_item.name %></td>
+				<tr id="<%=check_item.id%>"><td><%= check_item.name %></td>
 		    <td><%= link_to_problem(check_item.id) %></td>
 			  <td><%= link_to "Edit", edit_check_item_path(check_item) %></td></tr>
 	<% end %>
+	
+	
 </table>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#CheckItemTable').tableDnD({
+	  onDrop: function(table, row) {
+			var new_order = new Array()
+
+			var rows = table.tBodies[0].rows;
+			for(var i = 0; i < rows.length; ++i) {
+				new_order.push(rows[i].id)
+			}
+
+		  $.ajax({
+			  type: "PUT",
+			  url: "/check_lists/<%=@checklist.id %>?order="+new_order.join('X'),
+				datatype: 'json'
+			}).done(function( msg ) {
+			  alert( "Data Saved: " + msg );
+			});
+	  }
+	});
+});
+</script>
 <br/>
 <br/>
 
