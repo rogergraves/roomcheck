@@ -2,7 +2,7 @@ class CheckItem < ActiveRecord::Base
   validates :name, :presence => true
   
   belongs_to :check_list
-  has_many :results
+  has_many :results, :dependent => :destroy
   
   scope :by_item_order, :order => "item_order ASC, id ASC"
   

@@ -1,6 +1,6 @@
 class CheckList < ActiveRecord::Base
   validates :name, :presence => true
-  has_many :check_items
+  has_many :check_items, :dependent => :destroy
 
 
   scope :by_name, :order => "LOWER(name) ASC"

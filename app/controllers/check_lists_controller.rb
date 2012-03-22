@@ -18,6 +18,10 @@ class CheckListsController < ApplicationController
   end
 
   def destroy
+    check_list = CheckList.find_by_id(params[:check_list_id])
+    logger.info "CheckListsController#destroy: #{params[:check_list_id]}"
+    check_list.destroy ? redirect_to(check_lists_path, :notice => "Room Deleted") : flash[:error]
+
   end
   
   def create

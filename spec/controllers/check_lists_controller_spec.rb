@@ -55,5 +55,28 @@ describe CheckListsController do
       end
     end
   end
+  
+  describe '#delete: deletes check_list' do
+    before(:each) do
+      @check_list = CheckList.new(name: "Test Checklist")
+      @check_list.save
+      @check_item = CheckItem.new(name: "Test CheckItem", area: "Test Area", check_list_id: @check_list.id, item_order: 1)
+      @check_item.save
+      @result = Result.new(severity: 1, comment: "Some comment", check_item_id: @check_item.id)
+      @result.save
+    end
+    
+    it "destroying checklist deletes it" do
+      @check_list.destroy
+      @check_list.destroyed?.should eq true
+    end
+    
+    it "destroying checklist destroys dependent checkitems" do
+    end
+    
+    it "destroying checklist destroys dependent results" do
+    end
+    
+  end
 
 end
