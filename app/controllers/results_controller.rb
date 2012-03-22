@@ -8,7 +8,7 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(params[:result])
     if @result.save
-      redirect_to(check_lists_path, :notice => "Saved")
+      redirect_to(check_list_path(@result.check_item.check_list_id), :notice => "Saved")
     else
       errormessages = ""
       @result.errors.full_messages.each do |e|
@@ -26,7 +26,7 @@ class ResultsController < ApplicationController
   def update
     @result = Result.find(params[:id])
     if @result.update_attributes(params[:result])
-      redirect_to(check_lists_path, :notice => "Saved")
+      redirect_to(check_list_path(@result.check_item.check_list_id), :notice => "Saved")
     else
       errormessages = ""
       @result.errors.full_messages.each do |e|

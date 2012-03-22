@@ -31,7 +31,7 @@ $(document).ready(function() {
 			  url: "/check_lists/<%=@checklist.id %>?order="+new_order.join('X'),
 				datatype: 'json'
 			}).done(function( msg ) {
-			  alert( "Data Saved: " + msg );
+			  //alert( "Data Saved: " + msg );
 			});
 	  }
 	});
@@ -39,16 +39,25 @@ $(document).ready(function() {
 </script>
 <br/>
 <br/>
-<% if @checkitems.length == 0 && @checkitemtemplatescount > 0 %>
+<% if @checkitems.length == 0 || @checkitemtemplatescount > 0 %>
     <div class="alert alert-info">
         <h2>You have a new room!</h2>
         <br /><br />
-    <%= link_to "Pre-populate Items", check_item_templates_clone_path(:check_list_id => params[:id])%><br />
-    <%= form_tag(check_list_clone_path, :method => :post) do |f| %>
-        OR copy check items from: <%= select_tag "clone_check_list_id", options_from_collection_for_select(@checklists, "id", "name") %>
-        <%= hidden_field_tag 'check_list_id', params[:id] %>
-        <%= submit_tag "Clone" %>
-    <% end %>
+				<% if @checkitemtemplatescount > 0 %>	
+ 				   <%= link_to "Pre-populate Items", check_item_templates_clone_path(:check_list_id => params[:id])%><br />
+					 <% if @checklists.count > 0 %>
+						 <br />
+					   OR
+					 <% end %>
+				<% end %>
+				<% if @checklists.count > 0 %>		
+			    <%= form_tag(check_list_clone_path, :method => :post) do |f| %>
+			        copy check items from: 
+							<%= select_tag "clone_check_list_id", options_from_collection_for_select(@checklists, "id", "name") %>
+			        <%= hidden_field_tag 'check_list_id', params[:id] %>
+			        <%= submit_tag "Clone" %>
+			    <% end %>
+	    	<% end %>
     </div>
 <% end %>
 <%= link_to "Add Check Item", new_check_item_path(:check_list_id => params[:id])%><br />
