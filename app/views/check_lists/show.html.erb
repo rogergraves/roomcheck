@@ -1,5 +1,11 @@
-<h1>Check Items: <%= @checklist.name %></h1>
-<table id="CheckItemTable" cellspacing='0' cellpadding='5'>
+
+
+
+
+<h1>Room: <%= @checklist.name %></h1>
+<table id="CheckItemTable" cellspacing='0' cellpadding='2'>
+
+
 	<% @checkitems.each do |check_item| %> 
 				<tr id="<%=check_item.id%>"><td><%= check_item.name %></td>
 		    <td><%= link_to_problem(check_item.id) %></td>
@@ -33,6 +39,18 @@ $(document).ready(function() {
 </script>
 <br/>
 <br/>
-
-<%= link_to "Add Item", new_check_item_path(:check_list_id => params[:id])%><br />
+<% if @checkitems.length == 0 && @checkitemtemplatescount > 0 %>
+    <div class="alert alert-info">
+        <h2>You have a new room!</h2>
+        <br /><br />
+    <%= link_to "Pre-populate Items", check_item_templates_clone_path(:check_list_id => params[:id])%><br />
+    <%= form_tag(check_list_clone_path, :method => :post) do |f| %>
+        OR copy check items from: <%= select_tag "clone_check_list_id", options_from_collection_for_select(@checklists, "id", "name") %>
+        <%= hidden_field_tag 'check_list_id', params[:id] %>
+        <%= submit_tag "Clone" %>
+    <% end %>
+    </div>
+<% end %>
+<%= link_to "Add Check Item", new_check_item_path(:check_list_id => params[:id])%><br />
+<%= link_to "Delete Room", check_list_path(:check_list_id => params[:id]), confirm: 'Are you sure?', method: :delete %><br />
 <%= link_to "Go back", check_lists_path %>

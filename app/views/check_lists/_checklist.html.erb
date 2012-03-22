@@ -2,11 +2,8 @@
 	<% @check_list.errors.full_messages.each do |msg| %>
 		<%= msg %>
 	<% end %>
-	<%= f.label :name, "Checklist name" %>
+	<%= f.label :name, "Room name or number" %>
 	<%= f.text_field :name %>
-<br/>
-<%= f.label :add_template_items, "Add template items?"  %>
-<%= f.select :add_template_items, options_for_select([["No"], ["Yes"]]) %>
 <br/>
 	<%= f.submit "Save"%>
 <% end %>

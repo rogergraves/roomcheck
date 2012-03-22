@@ -1,0 +1,29 @@
+<h1>Default Checks for New Rooms</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Area</th>
+    <th>Item order</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @check_item_templates.each do |check_item_template| %>
+  <tr>
+    <td><%= check_item_template.name %></td>
+    <td><%= check_item_template.area %></td>
+    <td><%= check_item_template.item_order %></td>
+    <td><%= link_to 'Show', check_item_template %></td>
+    <td><%= link_to 'Edit', edit_check_item_template_path(check_item_template) %></td>
+    <td><%= link_to 'Destroy', check_item_template, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Check item template', new_check_item_template_path %>
+<br />
+<%= link_to 'Back to Check Lists', check_lists_path %>

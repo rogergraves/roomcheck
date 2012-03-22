@@ -1,6 +1,6 @@
-<h1>Checklists</h1>
+<h1>Rooms</h1>
 <br/>
-<%=link_to "Add Checklist", new_check_list_path %>
+<%=link_to "Add Room", new_check_list_path %>
 <br/>
 <br/>
 <ul id="check-list">
@@ -8,3 +8,6 @@
 	    <li><%= link_to check_list.name, check_list_path(check_list) %></li>
     <% end %>
 </ul>
+
+<br/>
+<%= link_to "View/edit check item templates", check_item_templates_path %>

@@ -11,15 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120321000014) do
+ActiveRecord::Schema.define(:version => 20120321225705) do
+
+  create_table "check_item_templates", :force => true do |t|
+    t.string   "name"
+    t.string   "area"
+    t.integer  "item_order"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "check_items", :force => true do |t|
     t.string   "name"
     t.string   "area"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "check_list_id"
-    t.boolean  "template_item", :default => false, :null => false
     t.integer  "item_order"
   end
 
