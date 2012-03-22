@@ -39,7 +39,7 @@ $(document).ready(function() {
 </script>
 <br/>
 <br/>
-<% if @checkitems.length == 0 || @checkitemtemplatescount > 0 %>
+<% if @checkitems.length == 0 && (@checkitemtemplatescount > 0 || @checklists.count > 0) %>
     <div class="alert alert-info">
         <h2>You have a new room!</h2>
         <br /><br />
