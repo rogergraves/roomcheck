@@ -15,7 +15,7 @@
 			<td><%= result.check_item.check_list.name %></td>
 			<td><%= result.check_item.area %></td>
 			<td><%= result.check_item.name %></td>
-			<td><%= result.comment %></td>
+			<td><%= link_to result.comment, edit_result_path(result) %></td>
 			<td><%= result.severity %></td>
 		</tr>
 <% end %>

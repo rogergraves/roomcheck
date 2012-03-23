@@ -5,4 +5,6 @@
 <%= link_to "Problem Fixed", result_path(:result_id => @result.id), :method => 'DELETE', :confirm => 'Are you sure?'%>
 <br />
 
-<%= link_to "Go back", check_list_path(@result.check_item.check_list.id) %>
+<%= link_to "Go to room", check_list_path(@result.check_item.check_list.id) %>
+<br />
+<%= link_to "See all problems", results_path %>
