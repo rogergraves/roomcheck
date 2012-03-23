@@ -7,7 +7,8 @@
 
 
 	<% @checkitems.each do |check_item| %> 
-				<tr id="<%=check_item.id%>"><td><%= check_item.name %></td>
+				<tr id="<%=check_item.id%>"><td><%= check_item.name %> in <%= check_item.area %></td>
+				    <td></td>
 		    <td><%= link_to_problem(check_item.id) %></td>
 			  <td><%= link_to "Edit", edit_check_item_path(check_item) %></td></tr>
 	<% end %>
