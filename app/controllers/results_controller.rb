@@ -1,4 +1,13 @@
 class ResultsController < ApplicationController
+  def index
+    # if(params[:sort_by] == 'room')
+    #   @results = Result.by_room.all
+    # else
+      @results = Result.by_severity.all
+    # end
+    
+  end
+  
   def new
     @checkitem = CheckItem.find_by_id(params[:check_item_id])
     @result = Result.new
