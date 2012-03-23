@@ -3,3 +3,4 @@ class DropUnits < ActiveRecord::Migration
     # drop_table :units
   end
 end
+
