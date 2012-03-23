@@ -9,6 +9,10 @@ class Result < ActiveRecord::Base
 
   before_validation :set_default_severity
   
+  scope :by_severity, :order => "severity DESC"
+#  scope :by_room, joins(:check_list).order('check_lists.name asc')
+  
+  
   def set_default_severity
     
     # If a comment does not exist and severity does not exist, severity should be set to 0 (OK)

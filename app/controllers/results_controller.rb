@@ -1,4 +1,13 @@
 class ResultsController < ApplicationController
+  def index
+    # if(params[:sort_by] == 'room')
+    #   @results = Result.by_room.all
+    # else
+      @results = Result.by_severity.all
+    # end
+    
+  end
+  
   def new
     @checkitem = CheckItem.find_by_id(params[:check_item_id])
     @result = Result.new
@@ -8,7 +17,7 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(params[:result])
     if @result.save
-      redirect_to(check_lists_path, :notice => "Saved")
+      redirect_to(check_list_path(@result.check_item.check_list_id), :notice => "Saved")
     else
       errormessages = ""
       @result.errors.full_messages.each do |e|
@@ -26,7 +35,7 @@ class ResultsController < ApplicationController
   def update
     @result = Result.find(params[:id])
     if @result.update_attributes(params[:result])
-      redirect_to(check_lists_path, :notice => "Saved")
+      redirect_to(check_list_path(@result.check_item.check_list_id), :notice => "Saved")
     else
       errormessages = ""
       @result.errors.full_messages.each do |e|
