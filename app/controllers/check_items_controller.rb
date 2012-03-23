@@ -11,7 +11,32 @@ class CheckItemsController < ApplicationController
     # list = CheckList.find_by_id(params[:check_list_id])
     # check_item = list.check_items.build(params[:check_item])
     @check_item = CheckItem.new(params[:check_item])
-    @check_item.save ? redirect_to(check_list_path(@check_item.check_list_id), :notice => "Item Saved") : flash[:error]
+    if @check_item.save 
+      redirect_to(check_list_path(@check_item.check_list_id), :notice => "Item Saved") 
+      
+      if(params[:add_all_rooms])
+        checklists = CheckList.all
+        checklists.each do |checklist|
+          unless checklist.id == @check_item.check_list.id
+            CheckItem.create({
+              name: @check_item.name,
+              area: @check_item.area,
+              check_list_id: checklist.id,
+            })
+          end
+        end
+        CheckItemTemplate.create({
+          name: @check_item.name,
+          area: @check_item.area,
+        })
+      end    
+      
+      
+      
+    else
+      flash[:error]
+    end
+    
   end
 
   def edit

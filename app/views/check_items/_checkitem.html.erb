@@ -14,6 +14,14 @@
 <% else %>
 	<%= f.text_field :check_list_id %>
 <% end %>
+
+<% if @check_item.id.nil? %>
+	<br />
+	<%= check_box_tag "add_all_rooms", true %>
+	Add to all rooms
+	<br />
+
+<% end %>
 <br/>
 	<%= f.submit "Save"%>
 <% end %>
