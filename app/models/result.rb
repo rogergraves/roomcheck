@@ -6,12 +6,15 @@ class Result < ActiveRecord::Base
   
 
   belongs_to :check_item
-
+  has_one :check_list, :through => :check_item
+  
   before_validation :set_default_severity
   
-  scope :by_severity, :order => "severity DESC"
-#  scope :by_room, joins(:check_list).order('check_lists.name asc')
-  
+  scope :by_severity, lambda { |ord| {:order => "severity #{ord}"}}
+  scope :by_comment, lambda { |ord| {:order => "LOWER(comment) #{ord}"}}
+  scope :by_room, lambda { |ord| joins(:check_list).order("LOWER(check_lists.name) #{ord}") }
+  scope :by_area, lambda {|ord| joins(:check_item).order("LOWER(check_items.area) #{ord}") }
+  scope :by_check_item, lambda {|ord| joins(:check_item).order("LOWER(check_items.name) #{ord}") }
   
   def set_default_severity
     
@@ -31,11 +34,27 @@ class Result < ActiveRecord::Base
 
 end
 
+
+# create_table "check_lists", :force => true do |t|
+#   t.string   "name"
+#   t.datetime "created_at", :null => false
+#   t.datetime "updated_at", :null => false
+# end
+#
+# create_table "check_items", :force => true do |t|
+#   t.string   "name"
+#   t.string   "area"
+#   t.datetime "created_at",    :null => false
+#   t.datetime "updated_at",    :null => false
+#   t.integer  "check_list_id"
+#   t.integer  "item_order"
+# end
+# 
 # create_table "results", :force => true do |t|
 #   t.integer  "severity"
 #   t.string   "comment"
-#   t.integer  "unit_id"
 #   t.integer  "check_item_id"
 #   t.datetime "created_at",    :null => false
 #   t.datetime "updated_at",    :null => false
+#   t.datetime "completed_on"
 # end

@@ -1,10 +1,19 @@
 class ResultsController < ApplicationController
   def index
-    # if(params[:sort_by] == 'room')
-    #   @results = Result.by_room.all
-    # else
-      @results = Result.by_severity.all
-    # end
+    
+    @order = params[:ord] == 'desc' ? 'asc' : 'desc'
+
+    if(params[:sort_by] == 'room')
+      @results = Result.by_room(params[:ord]).all
+    elsif(params[:sort_by] == 'area')
+      @results = Result.by_area(params[:ord]).all
+    elsif(params[:sort_by] == 'check_item')
+      @results = Result.by_check_item(params[:ord]).all
+    elsif(params[:sort_by] == 'comment')
+      @results = Result.by_comment(params[:ord]).all
+    else
+      @results = Result.by_severity(params[:ord]).all
+    end
     
   end
   

@@ -8,6 +8,7 @@ class CheckItem < ActiveRecord::Base
   
   before_create :add_item_order
   
+  
   def add_item_order
       item_order_numbers = []
       check_items = CheckList.find_by_id(self.check_list_id).check_items
