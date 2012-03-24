@@ -39,13 +39,13 @@ class ResultsController < ApplicationController
     else
       errormessages = ""
       @result.errors.full_messages.each do |e|
-        errormessages += ", " if errormessages.length > 0 
+        errormessages += ", " if errormessages.length > 0
         errormessages += e
       end
       redirect_to(check_lists_path, :notice => "Errors occurred: #{errormessages}")
     end
   end
-
+# CHECKCHECK look at destroy method - does it destroy?
   def destroy
      @result = Result.find_by_id(params[:id])
      @result.completed_on = Time.now
@@ -58,11 +58,3 @@ class ResultsController < ApplicationController
   end
 end
 
-# create_table "results", :force => true do |t|
-#   t.integer  "severity"
-#   t.string   "comment"
-#   t.integer  "unit_id"
-#   t.integer  "check_item_id"
-#   t.datetime "created_at",    :null => false
-#   t.datetime "updated_at",    :null => false
-# end

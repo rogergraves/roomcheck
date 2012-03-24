@@ -1,13 +1,16 @@
 <h1>Room: <%= @checklist.name %></h1>
 <table id="CheckItemTable" cellspacing='0' cellpadding='2'>
 
-	<% @checkitems.each do |check_item| %> 	
-	    <tr id="<%=check_item.id%>"><td><%= button_to "Complete", results_path, :method => "post" %></td>
+  <% @checkitems.each do |check_item| %>
+	<tr id="<%=check_item.id%>"><td><%= form_for Result.new do |f| %>
+	    <%= f.hidden_field :check_item_id, :value => check_item.id %>
+	    <%= f.submit "Complete" %>
+        <% end %>
+	  </td>
 		<td><%= check_item.name %> in <%= check_item.area %></td>
 		<td><%= link_to_problem(check_item.id) %></td>
 		<td><%= link_to "Edit", edit_check_item_path(check_item) %></td></tr>
-	<% end %>
-
+  <% end %>
 </table>
 
 <script type="text/javascript">

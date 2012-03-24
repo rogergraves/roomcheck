@@ -10,6 +10,7 @@ class Result < ActiveRecord::Base
   before_validation :set_default_severity
   
   scope :by_severity, :order => "severity DESC"
+  scope :first_not_done, :conditions => "completed_on = NIL"
 #  scope :by_room, joins(:check_list).order('check_lists.name asc')
   
   
@@ -26,7 +27,6 @@ class Result < ActiveRecord::Base
         self.severity = 1
       end
     end
-    
   end
 
 end

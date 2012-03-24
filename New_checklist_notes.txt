@@ -17,3 +17,13 @@ Work flow for creating a new CheckList
 
 3. Blank slate
     a) Create new CheckList (user enters name -- room #)
+    
+    
+   in show.html.erb: <% if result = check_item.first_not_done %>
+    
+    
+    in result model:   scope :not_done, :conditions => [ "completed_on = NULL" ]
+    
+    in Check_item.rb model:  def first_not_done
+                                results.not_done.first
+                             end

@@ -22,8 +22,9 @@ class CheckItem < ActiveRecord::Base
       end
     end
 
-  def edit_item_order
-  end
+  def first_not_done
+     results.not_done.first
+   end
 end
 
 
