@@ -1,12 +1,14 @@
 <h1>Room: <%= @checklist.name %></h1>
 <table id="CheckItemTable" cellspacing='0' cellpadding='2'>
-
+    
   <% @checkitems.each do |check_item| %>
 	<tr id="<%=check_item.id%>"><td><%= form_for Result.new do |f| %>
 	    <%= f.hidden_field :check_item_id, :value => check_item.id %>
-	    <%= f.submit "Complete" %>
+	    <%= check_box_tag("result", "0") %>
+	    <td><%= button_to "Submit", result_path(:check_item_id => check_item.id, :severity => "0", :completed_on => DateTime.now), :method => :get%></td>
         <% end %>
 	  </td>
+
 		<td><%= check_item.name %> in <%= check_item.area %></td>
 		<td><%= link_to_problem(check_item.id) %></td>
 		<td><%= link_to "Edit", edit_check_item_path(check_item) %></td></tr>
