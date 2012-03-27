@@ -11,26 +11,26 @@
 </table>
 
 <script type="text/javascript">
-// $(document).ready(function() {
-// 	$('#CheckItemTable').tableDnD({
-// 	  onDrop: function(table, row) {
-// 			var new_order = new Array()
-// 
-// 			var rows = table.tBodies[0].rows;
-// 			for(var i = 0; i < rows.length; ++i) {
-// 				new_order.push(rows[i].id)
-// 			}
-// 
-// 		  $.ajax({
-// 			  type: "PUT",
-// 			  url: "/check_lists/<%=@checklist.id %>?order="+new_order.join('X'),
-// 				datatype: 'json'
-// 			}).done(function( msg ) {
-// 			  //alert( "Data Saved: " + msg );
-// 			});
-// 	  }
-// 	});
-// });
+$(document).ready(function() {
+	$('#CheckItemTable').tableDnD({
+	  onDrop: function(table, row) {
+			var new_order = new Array()
+
+			var rows = table.tBodies[0].rows;
+			for(var i = 0; i < rows.length; ++i) {
+				new_order.push(rows[i].id)
+			}
+
+		  $.ajax({
+			  type: "PUT",
+			  url: "/check_lists/<%=@checklist.id %>?order="+new_order.join('X'),
+				datatype: 'json'
+			}).done(function( msg ) {
+			  //alert( "Data Saved: " + msg );
+			});
+	  }
+	});
+});
 </script>
 <br/>
 <br/>
