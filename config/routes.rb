@@ -1,7 +1,8 @@
 Roomcheck::Application.routes.draw do
   
   resources :check_item_templates
-  
+
+#CHECKCHECK    We need to check the naming on the clone match and post.  
   match "check_item_templates_clone" => "check_item_templates#clone"
   post "check_list_clone" => "check_lists#clone"
 

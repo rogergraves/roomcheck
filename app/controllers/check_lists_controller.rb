@@ -4,12 +4,10 @@ class CheckListsController < ApplicationController
   end
   
   def show
-    @checklist = CheckList.find(params[:id])
-
+    @checklist = CheckList.find_by_id(params[:id])
     @checklists = CheckList.by_name.select { |check_list| check_list.check_items.count > 0 }
     @checkitems = CheckItem.by_item_order.find_all_by_check_list_id(params[:id])
     @checkitemtemplatescount = CheckItemTemplate.count
-
   end
 
   def new
@@ -23,9 +21,8 @@ class CheckListsController < ApplicationController
     check_list = CheckList.find_by_id(params[:check_list_id])
     logger.info "CheckListsController#destroy: #{params[:check_list_id]}"
     check_list.destroy ? redirect_to(check_lists_path, :notice => "#{check_list.name} Deleted") : flash[:error]
-
   end
-  
+
   def create
     @check_list = CheckList.new(params[:check_list])
     if @check_list.save
@@ -35,7 +32,6 @@ class CheckListsController < ApplicationController
     end
   end
   
-
   def update
     order = params[:order]
     new_order = order.split("X")
@@ -53,7 +49,6 @@ class CheckListsController < ApplicationController
       check_item.save
     end
   end
-
 
   def clone
     checks_from_clone = CheckItem.find_all_by_check_list_id(params[:clone_check_list_id])

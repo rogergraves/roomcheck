@@ -22,6 +22,11 @@ class CheckItem < ActiveRecord::Base
         end
       end
     end
+
+  def first_not_done
+     results.not_done.first
+   end
+
 end
 
 

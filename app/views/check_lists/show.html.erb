@@ -2,7 +2,7 @@
 <table id="CheckItemTable" cellspacing='0' cellpadding='2'>
 
 	<% @checkitems.each do |check_item| %> 	
-	  <tr id="<%=check_item.id%>"><td><%= button_to "Complete", results_path, :method => "post" %></td>
+	  <tr id="<%=check_item.id%>"><td><%= check_box_tag("result", "0") %></td>
 			<td><%= check_item.name %> in <%= check_item.area %> <%= link_to "[edit]", edit_check_item_path(check_item) %></td>
 			<td><%= link_to_problem(check_item.id) %></td>
 		</tr>
