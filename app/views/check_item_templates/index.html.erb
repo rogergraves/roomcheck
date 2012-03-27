@@ -12,7 +12,7 @@
 
 <% @check_item_templates.each do |check_item_template| %>
   <tr>
-    <td><%= check_item_template.name %></td>
+    <tr id="<%=check_item.id%>"><td><%= check_item_template.name %></td>
     <td><%= check_item_template.area %></td>
     <td><%= check_item_template.item_order %></td>
     <td><%= link_to 'Show', check_item_template %></td>
@@ -21,6 +21,29 @@
   </tr>
 <% end %>
 </table>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#CheckItemTable').tableDnD({
+	  onDrop: function(table, row) {
+			var new_order = new Array()
+
+			var rows = table.tBodies[0].rows;
+			for(var i = 0; i < rows.length; ++i) {
+				new_order.push(rows[i].id)
+			}
+
+		  $.ajax({
+			  type: "PUT",
+			  url: "/check_lists/<%=@checklist.id %>?order="+new_order.join('X'),
+				datatype: 'json'
+			}).done(function( msg ) {
+			  //alert( "Data Saved: " + msg );
+			});
+	  }
+	});
+});
+</script>
 
 <br />
 
