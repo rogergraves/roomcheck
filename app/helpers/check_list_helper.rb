@@ -12,4 +12,10 @@ module CheckListHelper
     end   
 
   end
+  
+  def disable_checkbox check_item_id
+    result = Result.find_by_check_item_id_and_completed_on(check_item_id, nil)    
+    result.comment ? true : false
+  end
+  
 end

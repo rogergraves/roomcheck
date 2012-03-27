@@ -24,17 +24,21 @@ class ResultsController < ApplicationController
   end
 
   def create
-    @result = Result.new(params[:result])
-    if @result.save
-      redirect_to(check_list_path(@result.check_item.check_list_id), :notice => "Saved")
-    else
-      errormessages = ""
-      @result.errors.full_messages.each do |e|
-        errormessages += ", " if errormessages.length > 0 
-        errormessages += e
-      end
-      redirect_to(check_lists_path, :notice => "Errors occurred: #{errormessages}")
-    end   
+    if(params[:results])
+      # Do something here
+      logger.info "RESULTS!!!!! #{params[:results]}"
+    else    
+      @result = Result.new(params[:result])
+      if @result.save
+        redirect_to(check_list_path(@result.check_item.check_list_id), :notice => "Saved")
+      else
+        errormessages = ""
+        @result.errors.full_messages.each do |e|
+          errormessages += ", " if errormessages.length > 0 
+          errormessages += e
+        end
+        redirect_to(check_lists_path, :notice => "Errors occurred: #{errormessages}")
+      end   
   end
 
   def edit    
