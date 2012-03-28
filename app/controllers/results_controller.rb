@@ -32,6 +32,7 @@ class ResultsController < ApplicationController
       check_item_ids.each do |check_item_id, junk|
         exists = Result.find_by_check_item_id_and_completed_on(check_item_id, nil)
         if exists
+          exists.updated_at = Time.now
           exists.save
         else
           result = Result.new(severity: 0, check_item_id: check_item_id)
