@@ -3,15 +3,14 @@ class Result < ActiveRecord::Base
   validates :severity, :presence => true
   validates_inclusion_of :severity, :in => 0..5
   validates_inclusion_of :severity, :in => 1..5, :if => :comment?
+  validates_uniqueness_of :check_item_id, :scope => [:check_item_id, :completed_on]
   
-
   belongs_to :check_item
   has_one :check_list, :through => :check_item
   
   before_validation :set_default_severity
   scope :by_severity, :order => "severity DESC"
   scope :first_not_done, :conditions => "completed_on = NIL"
-#  scope :by_room, joins(:check_list).order('check_lists.name asc')
   
   scope :by_severity, lambda { |ord| {:order => "severity #{ord}"}}
   scope :by_comment, lambda { |ord| {:order => "LOWER(comment) #{ord}"}}
