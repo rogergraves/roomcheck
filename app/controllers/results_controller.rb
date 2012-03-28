@@ -25,8 +25,22 @@ class ResultsController < ApplicationController
 
   def create
     if(params[:results])
-      # Do something here
-      logger.info "RESULTS!!!!! #{params[:results]}"
+      check_list_params = params[:check_list_id]
+      check_list_id = check_list_params.first[0]
+      
+      check_item_ids = params[:results]
+      check_item_ids.each do |check_item_id, junk|
+        exists = Result.find_by_check_item_id_and_completed_on(check_item_id, nil)
+        if exists
+          exists.save
+        else
+          result = Result.new(severity: 0, check_item_id: check_item_id)
+          result.save
+        end
+      end
+      
+      redirect_to(check_list_path(check_list_id))
+      
     else    
       @result = Result.new(params[:result])
       if @result.save
@@ -39,6 +53,7 @@ class ResultsController < ApplicationController
         end
         redirect_to(check_lists_path, :notice => "Errors occurred: #{errormessages}")
       end   
+    end
   end
 
   def edit    
