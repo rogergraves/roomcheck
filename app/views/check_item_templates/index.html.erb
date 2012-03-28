@@ -1,5 +1,5 @@
 <h1>Default Checks for New Rooms</h1>
-
+<p>All items can be added to any new room as a default template item</p>
 
 
 <table id="CheckItemTemplateTable" cellspacing='0' cellpadding='2'>
@@ -12,7 +12,6 @@
    <tr id="<%=check_item_template.id%>">
 		<td><%= check_item_template.name %></td>
 		<td><%= check_item_template.area %></td>
-		<td><%= link_to 'Show', check_item_template %></td>
 		<td><%= link_to 'Edit', edit_check_item_template_path(check_item_template) %></td>
 		<td><%= link_to 'Delete', check_item_template, confirm: 'Are you sure?', method: :delete %></td>
   </tr>

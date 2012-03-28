@@ -44,7 +44,7 @@ class CheckItemTemplatesController < ApplicationController
 
     respond_to do |format|
       if @check_item_template.save
-        format.html { redirect_to @check_item_template, notice: 'Check item template was successfully created.' }
+        format.html { redirect_to check_item_templates_path, notice: 'Check item template was successfully created.' }
         format.json { render json: @check_item_template, status: :created, location: @check_item_template }
       else
         format.html { render action: "new" }
@@ -77,6 +77,7 @@ class CheckItemTemplatesController < ApplicationController
   
   def update
     @check_item_template = CheckItemTemplate.find(params[:id])
+    @check_item_template.update_attributes(params[:check_item_template]) ? redirect_to(check_item_templates_path, :notice => "Item Saved") : flash[:error]
   end
    
    
