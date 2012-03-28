@@ -7,10 +7,10 @@ describe Result do
   end
 
   it 'severity should be between 0-5' do
-    result_fail = Result.new :severity => 6, :comment => "Some comment", :unit_id => 1, :check_item_id => 1
+    result_fail = Result.new :severity => 6, :comment => "Some comment", :check_item_id => 1
     result_fail.should_not be_valid
 
-    result_pass = Result.new :severity => 3, :comment => "Some comment", :unit_id => 1, :check_item_id => 1
+    result_pass = Result.new :severity => 3, :comment => "Some comment", :check_item_id => 1
     puts result_pass.inspect
     result_pass.should be_valid
         
@@ -18,7 +18,7 @@ describe Result do
 
   context 'when a comment exists' do
     it "should have a severity greater than 0" do
-      result = Result.new :comment => "Something", :unit_id => 1, :check_item_id => 1
+      result = Result.new :comment => "Something", :check_item_id => 1
       result.valid?
       result.severity.should == 1
     end
@@ -26,7 +26,7 @@ describe Result do
   
   context 'when an existing result exists' do
     before :each do
-      @result = Result.new :comment => "Something", :unit_id => 1, :check_item_id => 1
+      @result = Result.new :comment => "Something", :check_item_id => 1
       @result.save
     end
     
@@ -41,10 +41,13 @@ describe Result do
       @result.save
       @result.severity.should == 5
     end
-    
+ 
+  
+    it 'only one result per check_item_id with a completed_on set to nil' do
+      @result2 = Result.new :comment => "Something", :check_item_id => 1
+      @result2.should_not be_valid
+    end
   end
-  
-  
 end
 
 
