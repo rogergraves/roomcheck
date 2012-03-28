@@ -1,49 +1,46 @@
 <h1>Default Checks for New Rooms</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Area</th>
-    <th>Item order</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
+
+<table id="CheckItemTemplateTable" cellspacing='0' cellpadding='2'>
+	<tr>
+    <th align="left">Name</th>
+    <th align="left">Area</th>
+		<th colspan="3"></td>
+  </tr>
 <% @check_item_templates.each do |check_item_template| %>
-  <tr>
-    <tr id="<%=check_item.id%>"><td><%= check_item_template.name %></td>
-    <td><%= check_item_template.area %></td>
-    <td><%= check_item_template.item_order %></td>
-    <td><%= link_to 'Show', check_item_template %></td>
-    <td><%= link_to 'Edit', edit_check_item_template_path(check_item_template) %></td>
-    <td><%= link_to 'Destroy', check_item_template, confirm: 'Are you sure?', method: :delete %></td>
+   <tr id="<%=check_item_template.id%>">
+		<td><%= check_item_template.name %></td>
+		<td><%= check_item_template.area %></td>
+		<td><%= link_to 'Show', check_item_template %></td>
+		<td><%= link_to 'Edit', edit_check_item_template_path(check_item_template) %></td>
+		<td><%= link_to 'Delete', check_item_template, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#CheckItemTable').tableDnD({
+	$('#CheckItemTemplateTable').tableDnD({
 	  onDrop: function(table, row) {
-			var new_order = new Array()
-
-			var rows = table.tBodies[0].rows;
-			for(var i = 0; i < rows.length; ++i) {
-				new_order.push(rows[i].id)
-			}
-
-		  $.ajax({
-			  type: "PUT",
-			  url: "/check_lists/<%=@checklist.id %>?order="+new_order.join('X'),
-				datatype: 'json'
-			}).done(function( msg ) {
-			  //alert( "Data Saved: " + msg );
-			});
+	  			var new_order = new Array()
+	  			var rows = table.tBodies[0].rows;
+	  			for(var i = 0; i < rows.length; ++i) {
+	  				new_order.push(rows[i].id)
+	  			}
+	  			
+	  		  $.ajax({
+	  			  type: "PUT",
+	  			  url: "/check_item_templates/reorder?order="+new_order.join('X'),
+	  				datatype: 'json'
+	  			}).done(function( msg ) {
+	  			  // alert( "Data Saved: " + msg );
+	  			});
 	  }
 	});
 });
 </script>
+
 
 <br />
 

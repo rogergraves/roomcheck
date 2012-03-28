@@ -2,7 +2,7 @@ class CheckItemTemplatesController < ApplicationController
   # GET /check_item_templates
   # GET /check_item_templates.json
   def index
-    @check_item_templates = CheckItemTemplate.all
+    @check_item_templates = CheckItemTemplate.by_item_order.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -55,19 +55,42 @@ class CheckItemTemplatesController < ApplicationController
 
   # PUT /check_item_templates/1
   # PUT /check_item_templates/1.json
+  
+  def reorder
+  
+    order = params[:order]
+    new_order = order.split("X")
+       
+       order_hash = {}
+       i = 1
+       new_order.each do |template_id|
+         order_hash[template_id] = i
+         i += 1
+       end
+       CheckItemTemplate.all.each do |template_item|
+         template_item.item_order = order_hash[template_item.id.to_s]
+         puts "********************* #{template_item.inspect}"
+         template_item.save
+       end  
+    
+  end
+  
   def update
     @check_item_template = CheckItemTemplate.find(params[:id])
-
-    respond_to do |format|
-      if @check_item_template.update_attributes(params[:check_item_template])
-        format.html { redirect_to @check_item_template, notice: 'Check item template was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @check_item_template.errors, status: :unprocessable_entity }
-      end
-    end
   end
+   
+   
+   
+  #   respond_to do |format|
+  #     if @check_item_template.update_attributes(params[:check_item_template])
+  #       format.html { redirect_to @check_item_template, notice: 'Check item template was successfully updated.' }
+  #       format.json { head :no_content }
+  #     else
+  #       format.html { render action: "edit" }
+  #       format.json { render json: @check_item_template.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /check_item_templates/1
   # DELETE /check_item_templates/1.json
