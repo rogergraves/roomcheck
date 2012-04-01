@@ -1,1 +1,5 @@
-A Ruby on Rails project to create checklists for rooms.
+Roomcheck is an open source application for hotel facilities to assist them with regular maintenance checks of the rooms. It will be optimized for iPad use and be useable on an iPhone.
+
+The current offline process is that a room checker user goes to a given room with a printed out list of possible problems to watch for. They check confirm each item as being OK or if there is a problem, they write down a comment. After checking all the rooms the problems are then entered into an Excel spreadsheet and handed off to the maintenance team.
+
+The Roomcheck application speeds up this process by allowing multiple checkoffs, Siri voice entered descriptions, and automated results outputs for Maintenance and Senior Management. 
