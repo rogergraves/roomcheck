@@ -14,16 +14,20 @@ function checkAll(check_everything, form_obj) {
 
 <h1>Room: <%= @checklist.name %></h1>
 <table id="CheckItemTable" cellspacing='0' cellpadding='3'>
-    <%= form_tag(results_path, :method => "post", :name => "makeok") do %>
-    <%= hidden_field(:check_list_id, @checklist.id) %>
-    <tr><td colspan="3"><%= check_box_tag('check_all', 'check_all', false, :onClick => "checkAll(this.checked, document.makeok);") %> Mark as OK unless problem is already entered</td></tr>
-    	<% @checkitems.each do |check_item| %>
-            <tr id="<%=check_item.id%>"><td><%= check_box_tag("results[#{check_item.id}]", true, false, :disabled => disable_checkbox(check_item.id)) %></td>
-                <td><%= check_item.name %> in <%= check_item.area %> <%= link_to "[edit]", edit_check_item_path(check_item) %></td>
-                <td><%= link_to_problem(check_item.id) %></td>
-            </tr>
-    	<% end %>
-    <tr><td colspan="3"><%= submit_tag "Mark selected as OK" %></td></tr>
+    <% if @checkitems.length > 0 %>
+		<%= form_tag(results_path, :method => "post", :name => "makeok") do %>
+			<%= hidden_field(:check_list_id, @checklist.id) %>
+			<% if @checkitems.length > 1 %>
+				<tr><td colspan="3" bgcolor="#e1e1e1"><%= check_box_tag('check_all', 'check_all', false, :onClick => "checkAll(this.checked, document.makeok);") %> Mark all below as OK unless problem is already entered</td></tr>
+			<% end %>
+			<% @checkitems.each do |check_item| %>
+			<tr id="<%=check_item.id%>"><td><%= check_box_tag("results[#{check_item.id}]", true, false, :disabled => disable_checkbox(check_item.id)) %></td>
+				<td><%= check_item.name %> in <%= check_item.area %> <%= link_to "[edit]", edit_check_item_path(check_item) %></td>
+				<td><%= link_to_problem(check_item.id) %></td>
+			</tr>
+			<% end %>
+			<tr><td colspan="3"><%= submit_tag "Mark selected as OK" %></td></tr>
+		<% end %>
 	<% end %>
 
 </table>
