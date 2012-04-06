@@ -1,5 +1,7 @@
 Roomcheck::Application.routes.draw do
   
+  devise_for :users
+
   resources :check_item_templates do
     collection do
       put :reorder

@@ -61,5 +61,8 @@ module Roomcheck
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    # This is necessary with Rails 3.1 on Heroku but not sure if it is applicable with Rails 3.2
+    # config.assets.initialize_on_precompile = false
   end
 end
