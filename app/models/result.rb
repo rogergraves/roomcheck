@@ -8,7 +8,8 @@ class Result < ActiveRecord::Base
   belongs_to :check_item
   has_one :check_list, :through => :check_item
   
-  before_validation :set_default_severity
+  before_validation :set_empty_comments_to_nill, :set_default_severity
+  
   scope :by_severity, :order => "severity DESC"
   scope :first_not_done, :conditions => "completed_on = NIL"
   
@@ -17,6 +18,10 @@ class Result < ActiveRecord::Base
   scope :by_room, lambda { |ord| joins(:check_list).order("LOWER(check_lists.name) #{ord}") }
   scope :by_area, lambda {|ord| joins(:check_item).order("LOWER(check_items.area) #{ord}") }
   scope :by_check_item, lambda {|ord| joins(:check_item).order("LOWER(check_items.name) #{ord}") }
+  
+  def set_empty_comments_to_nill
+    self.comment = nil if self.comment.blank?
+  end
   
   def set_default_severity
     
@@ -32,7 +37,7 @@ class Result < ActiveRecord::Base
       end
     end
   end
-
+  
 end
 
 
