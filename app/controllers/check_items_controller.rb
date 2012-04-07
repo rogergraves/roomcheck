@@ -50,7 +50,7 @@ class CheckItemsController < ApplicationController
 
   def destroy
     @check_item = CheckItem.find(params[:id])
-    @check_item.destroy ? redirect_to(check_list_path(check_list_id), :notice => "Item Deleted") : flash[:error]
+    @check_item.destroy ? redirect_to(check_list_path(@check_item.check_list_id), :notice => "Item Deleted") : flash[:error]
   end
 end
 
