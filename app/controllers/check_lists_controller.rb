@@ -48,6 +48,12 @@ class CheckListsController < ApplicationController
       check_item.item_order = order_hash[check_item.id.to_s]
       check_item.save
     end
+    
+    # BUGBUG -- This isn't working, when the AJAX calls it's returning a 500 error. We want it to return nothing!
+    respond_to do |format|
+      format.html
+      format.js { render :layout => false }
+    end
   end
 
   def clone
