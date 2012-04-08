@@ -1,3 +1,7 @@
+<% content_for :nav do %>
+<li><%=link_to "View Rooms", check_lists_path %></li>
+<li><%= link_to "View Checks", check_item_templates_path %></li>
+<% end %>
 
 <table class="table table-striped">
 	<thead>
@@ -15,7 +19,7 @@
 			<td><%= result.check_item.check_list.name %></td>
 			<td><%= result.check_item.area %></td>
 			<td><%= result.check_item.name %></td>
-			<td><%= link_to result.comment, edit_result_path(result) %></td>
+			<td><%= link_to result.comment.nil? ? "Problem reported" : result.comment, edit_result_path(result) %></td>
 			<td><%= result.severity %></td>
 		</tr>
 <% end %>

@@ -1,7 +1,10 @@
+<% content_for :nav do %>
+<li><%=link_to "Add Room", new_check_list_path %></li>
+<li><%= link_to "View Checks", check_item_templates_path %></li>
+<li><%= link_to "View Problems", results_path %></li>
+<% end %>
+
 <h1>Rooms</h1>
-<br/>
-<%=link_to "Add Room", new_check_list_path %>
-<br/>
 <br/>
 <ul id="check-list">
 	<% @checklists.each do |check_list| %>
@@ -9,8 +12,4 @@
     <% end %>
 </ul>
 
-<br/>
-<%= link_to "View reported problems", results_path %>
-<br/><br/>
-<%= link_to "View/edit check item templates", check_item_templates_path %>
-<br/>
+
