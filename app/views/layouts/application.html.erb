@@ -13,33 +13,36 @@
 </head>
 <body>
 <div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="#">Room Check</a>
-      <div class="nav-collapse">
-        <ul class="nav">
-		  <li><%= link_to("Link 1") %></li>
-		  <li><%= link_to("Link 2") %></li>
-		  <li><%= link_to("Link 3") %></li>
-          <li><%= link_to("Logout", destroy_user_session_path, :method => 'DELETE') if user_signed_in? %></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<%= link_to("Room Check", check_lists_path, :class => "brand") %>
+			<div class="nav-collapse">
+				<ul class="nav">
+					<%= yield :nav %>
+					<li><%= link_to("Logout", destroy_user_session_path, :method => 'DELETE') if user_signed_in? %></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
 
 
 
 <div class="container">
-	<% flash.each do |key, value| %>
-	    <%= content_tag(:div, value, :class => "flash #{key}") %>
+
+	<% flash.each do |name, msg| %>
+		<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+			<%= msg  %>
+		</div>
 	<% end %>
+
 	<%= yield %>
+
 </div>
 </body>
 </html>

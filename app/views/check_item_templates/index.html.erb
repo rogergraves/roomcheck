@@ -1,3 +1,8 @@
+<% content_for :nav do %>
+<li><%= link_to 'New Default Check', new_check_item_template_path %></li>
+<li><%= link_to 'Rooms List', check_lists_path %></li>
+<% end %>
+
 <h1>Default Checks for New Rooms</h1>
 <p>All items can be added to any new room as a default template item</p>
 
@@ -41,8 +46,4 @@ $(document).ready(function() {
 </script>
 
 
-<br />
 
-<%= link_to 'New Check item template', new_check_item_template_path %>
-<br />
-<%= link_to 'Back to Rooms List', check_lists_path %>
