@@ -42,6 +42,6 @@ $(function() {
 <br/>
 <%= f.hidden_field :check_item_id %>
 
-<%= f.submit "Save", :class => "btn btn-primary" %>
+<%= f.submit "Save", :class => "btn btn-primary" %> <%= link_to "Cancel", check_list_path(@result.check_item.check_list.id), :class => "btn" %>
 <% end %>
 </div><!-- End demo -->

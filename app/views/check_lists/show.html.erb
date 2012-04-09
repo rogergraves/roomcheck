@@ -26,13 +26,10 @@ function toggleSubmitButton(form_obj) {
 
 </script>
 <% end %>
-<% content_for :nav do %>
-<li><%= link_to "Add Check", new_check_item_path(:check_list_id => params[:id])%></li>
-<li><%= link_to "Delete Room", check_list_path(:check_list_id => params[:id]), confirm: 'Are you sure?', method: :delete %></li>
-<li><%= link_to "Go back", check_lists_path %></li>
-<% end %>
 
 <h1>Room: <%= @checklist.name %></h1>
+<p><%= link_to "Add Check", new_check_item_path(:check_list_id => params[:id]), :class => "btn btn-primary btn-small" %> <%= link_to "Delete Room", check_list_path(:check_list_id => params[:id]), confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger btn-small" %></p>
+
 <table id="CheckItemTable" class="table table-striped">
     <% if @checkitems.length > 0 %>
 		<%= form_tag(results_path, :method => "post", :name => "makeok") do %>
@@ -89,7 +86,7 @@ $(document).ready(function() {
         <h2>You have a new room!</h2>
         <br /><br />
 				<% if @checkitemtemplatescount > 0 %>	
- 				   <%= link_to "Pre-populate Items", check_item_templates_clone_path(:check_list_id => params[:id])%><br />
+ 				   <%= link_to "Pre-populate Checks", check_item_templates_clone_path(:check_list_id => params[:id]), :class => "btn btn-primary" %><br />
 					 <% if @checklists.count > 0 %>
 						 <br />
 					   OR
@@ -97,10 +94,10 @@ $(document).ready(function() {
 				<% end %>
 				<% if @checklists.count > 0 %>		
 			    <%= form_tag(check_list_clone_path, :method => :post) do |f| %>
-			        copy check items from: 
+			        copy checks from room: 
 							<%= select_tag "clone_check_list_id", options_from_collection_for_select(@checklists, "id", "name") %>
 			        <%= hidden_field_tag 'check_list_id', params[:id] %>
-			        <%= submit_tag "Clone" %>
+			        <%= submit_tag "Copy" %>
 			    <% end %>
 	    	<% end %>
     </div>

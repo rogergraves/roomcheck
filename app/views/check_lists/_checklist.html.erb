@@ -5,5 +5,5 @@
 	<%= f.label :name, "Room name or number" %>
 	<%= f.text_field :name %>
 <br/>
-	<%= f.submit "Save"%>
+	<%= f.submit("Save", :class => "btn btn-primary") %> <%= link_to "Cancel", check_lists_path, :class => "btn" %>
 <% end %>

@@ -1,25 +1,14 @@
-<%= form_for(@check_item_template) do |f| %>
-  <% if @check_item_template.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@check_item_template.errors.count, "error") %> prohibited this check_item_template from being saved:</h2>
-
-      <ul>
-      <% @check_item_template.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_for(@check_item_template, :html => {:class => "form-vertical"}) do |f| %>
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
+	<br />
   <div class="field">
-    <%= f.label :area %><br />
+    <%= f.label :area %>
     <%= f.text_field :area %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(:class => "btn btn-primary") %> <%= link_to 'Cancel', check_item_templates_path, :class => "btn" %>
   </div>
 <% end %>

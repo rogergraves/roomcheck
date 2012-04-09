@@ -1,11 +1,7 @@
-<% content_for :nav do %>
-<li><%=link_to "Add Room", new_check_list_path %></li>
-<li><%= link_to "View Checks", check_item_templates_path %></li>
-<li><%= link_to "View Problems", results_path %></li>
-<% end %>
-
 <h1>Rooms</h1>
-<br/>
+<br />
+<%=link_to "New Room", new_check_list_path, :class => "btn btn-primary" %>
+<br /><br />
 <ul id="check-list">
 	<% @checklists.each do |check_list| %>
 	    <li><%= link_to check_list.name, check_list_path(check_list) %></li>

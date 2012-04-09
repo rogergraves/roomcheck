@@ -23,5 +23,6 @@
 
 <% end %>
 <br/>
-	<%= f.submit "Save"%>
+	<%= f.submit("Save", :class => "btn btn-primary")%> <%= link_to "Cancel", check_list_path(@check_item.check_list_id), :class => "btn" %>
+	
 <% end %>

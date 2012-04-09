@@ -1,26 +1,27 @@
-<% content_for :nav do %>
-<li><%= link_to 'New Default Check', new_check_item_template_path %></li>
-<li><%= link_to 'Rooms List', check_lists_path %></li>
-<% end %>
-
 <h1>Default Checks for New Rooms</h1>
 <p>All items can be added to any new room as a default template item</p>
+<p><%= link_to 'New Default Check', new_check_item_template_path, :class => "btn btn-primary" %></p>
 
-
-<table id="CheckItemTemplateTable" cellspacing='0' cellpadding='2'>
-	<tr>
-    <th align="left">Name</th>
-    <th align="left">Area</th>
-		<th colspan="3"></td>
-  </tr>
-<% @check_item_templates.each do |check_item_template| %>
-   <tr id="<%=check_item_template.id%>">
-		<td><%= check_item_template.name %></td>
-		<td><%= check_item_template.area %></td>
-		<td><%= link_to 'Edit', edit_check_item_template_path(check_item_template) %></td>
-		<td><%= link_to 'Delete', check_item_template, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<table id="CheckItemTemplateTable" cellspacing='0' cellpadding='2' class="table">
+	<thead>
+		<tr>
+			<th align="left">Name</th>
+			<th align="left">Area</th>
+			<th></td>
+		</tr>
+	</thead>
+	<tbody>
+		<% @check_item_templates.each do |check_item_template| %>
+		   <tr id="<%=check_item_template.id%>">
+				<td><%= check_item_template.name %></td>
+				<td><%= check_item_template.area %></td>
+				<td>
+					<%= link_to 'Edit', edit_check_item_template_path(check_item_template), :class => "btn btn-primary btn-mini" %>
+					<%= link_to 'Delete', check_item_template, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger btn-mini" %>
+				</td>
+		  </tr>
+		<% end %>
+	</tbody>
 </table>
 
 <script type="text/javascript">

@@ -23,7 +23,11 @@
 			<%= link_to("Room Check", check_lists_path, :class => "brand") %>
 			<div class="nav-collapse">
 				<ul class="nav">
+					<li><%= link_to "Rooms", check_lists_path %></li>
+					<li><%= link_to "Checks", check_item_templates_path %></li>
+					<li><%= link_to "Problems", results_path %></li>
 					<%= yield :nav %>
+					<li class="divider-vertical"></li>
 					<li><%= link_to("Logout", destroy_user_session_path, :method => 'DELETE') if user_signed_in? %></li>
 				</ul>
 			</div>
