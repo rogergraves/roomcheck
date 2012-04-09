@@ -26,9 +26,12 @@ class CheckListsController < ApplicationController
   def create
     @check_list = CheckList.new(params[:check_list])
     if @check_list.save
-      redirect_to(check_list_path(@check_list.id), :notice => "List Saved")
+      redirect_to(check_list_path(@check_list.id), :notice => "Room Saved")
     else
-      flash[:error]
+      errors = []
+      @check_list.errors.each {|type, error| errors << "#{type.to_s.capitalize} #{error}" }
+      flash[:error] = "Errors occured: #{errors.join(', ')}"
+      redirect_to(new_check_list_path)
     end
   end
   
