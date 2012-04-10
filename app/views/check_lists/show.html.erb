@@ -38,20 +38,23 @@ function toggleSubmitButton(form_obj) {
 				<thead>
 					<tr>
 						<th><%= check_box_tag('check_all', 'check_all', false, :onClick => "checkAll(this.checked, document.makeok);") %></th>
-						<th colspan="2">Mark all below as OK unless problem is already entered</th>
+						<th>Check</th>
+						<th>Status</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 			<% end %>
 			<tbody>
 			<% @checkitems.each do |check_item| %>
-				<tr id="<%=check_item.id%>">
+				<tr id="<%= check_item.id %>">
 					<td><%= check_box_tag("results[#{check_item.id}]", true, false, :disabled => disable_checkbox(check_item.id), :onClick => "toggleSubmitButton(document.makeok);") %></td>
-					<td><%= check_item.name %> in <%= check_item.area %> <%= link_to "edit", edit_check_item_path(check_item), :class => "btn btn-warning btn-mini" %></td>
-					<td><%= link_to_problem(check_item.id) %></td>
+					<td><%= check_item.name %> in <%= check_item.area %> <%= link_to "", edit_check_item_path(check_item), :class => "icon-pencil" %></td>
+					<td><%= describe_problem(check_item.id) %></td>
+					<td><%= link_to_problem(check_item.id).html_safe %></td>
 				</tr>
 			<% end %>
 			</tbody>
-			<tr><td colspan="3"><%= submit_tag("Mark selected as OK", :confirm => 'Are you sure?', :class => 'btn btn-primary btn-large', :disabled => true, :id => 'submit') %></td></tr>
+			<tr><td colspan="4"><%= submit_tag("Mark selected as OK", :confirm => 'Are you sure?', :class => 'btn btn-primary btn-large', :disabled => true, :id => 'submit') %></td></tr>
 		<% end %>
 	<% end %>
 
