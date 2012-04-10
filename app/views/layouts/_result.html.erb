@@ -38,7 +38,7 @@ $(function() {
 <%= f.text_field :comment %>
 <br/><br/>
 <%= f.label :severity  %>
-<%= f.select :severity, options_for_select([["No Problems","0"], ["Negligible","1"], ["Minor","2"], ["Moderate","3"], ["Serious","4"], ["Emergency","5"]], :selected => @result.severity) %>
+<%= f.select :severity, options_for_select([[define_severity(0),"0"], [define_severity(1),"1"], [define_severity(2),"2"], [define_severity(3),"3"], [define_severity(4),"4"], [define_severity(5),"5"]], :selected => @result.severity) %>
 <br/>
 <%= f.hidden_field :check_item_id %>
 

@@ -19,15 +19,5 @@ module CheckListHelper
     result = Result.find_by_check_item_id_and_completed_on(check_item_id, nil)    
     result && result.severity > 0 ? true : false
   end
-  
-  def define_severity(severity)
-    case severity
-      when 1 then "Negligable"
-      when 2 then "Minor"
-      when 3 then "Moderate"
-      when 4 then "Serious"
-      when 5 then "Emergency"
-    end
-  end
-  
+    
 end

@@ -15,7 +15,7 @@
 			<td><%= result.check_item.area %></td>
 			<td><%= result.check_item.name %></td>
 			<td><%= link_to result.comment.nil? ? "Problem reported" : result.comment, edit_result_path(result) %></td>
-			<td><%= result.severity %></td>
+			<td><%= define_severity(result.severity) %></td>
 		</tr>
 <% end %>
 
