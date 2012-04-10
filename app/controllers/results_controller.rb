@@ -4,15 +4,15 @@ class ResultsController < ApplicationController
     @order = params[:ord] == 'desc' ? 'asc' : 'desc'
 
     if(params[:sort_by] == 'room')
-      @results = Result.by_room(params[:ord]).all
+      @results = Result.by_room(params[:ord]).where('severity > 0').find_all_by_completed_on(nil)
     elsif(params[:sort_by] == 'area')
-      @results = Result.by_area(params[:ord]).all
+      @results = Result.by_area(params[:ord]).where('severity > 0').find_all_by_completed_on(nil)
     elsif(params[:sort_by] == 'check_item')
-      @results = Result.by_check_item(params[:ord]).all
+      @results = Result.by_check_item(params[:ord]).where('severity > 0').find_all_by_completed_on(nil)
     elsif(params[:sort_by] == 'comment')
-      @results = Result.by_comment(params[:ord]).all
+      @results = Result.by_comment(params[:ord]).where('severity > 0').find_all_by_completed_on(nil)
     else
-      @results = Result.by_severity(params[:ord]).all
+      @results = Result.by_severity(params[:ord]).where('severity > 0').find_all_by_completed_on(nil)
     end
     
   end
