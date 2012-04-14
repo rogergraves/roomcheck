@@ -11,7 +11,7 @@
 	<tbody>
 <% @results.each do |result| %>
 		<tr>
-			<td><%= result.check_item.check_list.name %></td>
+			<td><%= link_to(result.check_item.check_list.name, check_list_path(result.check_item.check_list.id)) %></td>
 			<td><%= result.check_item.area %></td>
 			<td><%= result.check_item.name %></td>
 			<td><%= link_to result.comment.nil? ? "Problem reported" : result.comment, edit_result_path(result) %></td>
@@ -21,4 +21,3 @@
 
 	</tbody>
 </table>
-
