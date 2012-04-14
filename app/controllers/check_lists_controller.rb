@@ -6,8 +6,20 @@ class CheckListsController < ApplicationController
   def show
     @checklist = CheckList.find_by_id(params[:id])
     @checklists = CheckList.by_name.select { |check_list| check_list.check_items.count > 0 }
-    @checkitems = CheckItem.by_item_order.find_all_by_check_list_id(params[:id])
+    @checkitems = CheckItem.by_item_order.find_all_by_check_list_id(params[:id])  
     @checkitemtemplatescount = CheckItemTemplate.count
+    
+    if(params[:clean])
+      logger.info "\tCLEAN UP LIST!!!!!\n"
+      @checkitems.each do |item|
+        logger.info "\tLOOPED #{item.id}\n"
+        item.results.find_all_by_completed_on_and_severity(nil, 0).each do |result| 
+          result.completed_on = Time.now()
+          result.save
+          flash[:notice] = "OK's have been reset."
+        end
+      end
+    end
   end
 
   def new
