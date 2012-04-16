@@ -14,7 +14,7 @@ class Result < ActiveRecord::Base
   scope :first_not_done, :conditions => "completed_on = NIL"
   
   scope :by_severity, lambda { |ord| {:order => "severity #{ord}"}}
-  scope :by_comment, lambda { |ord| {:order => "LOWER(comment) #{ord}"}}
+  scope :by_comment, lambda { |ord| {:order => "LOWER(results.comment) #{ord}"}}
   scope :by_room, lambda { |ord| joins(:check_list).order("LOWER(check_lists.name) #{ord}") }
   scope :by_area, lambda {|ord| joins(:check_item).order("LOWER(check_items.area) #{ord}") }
   scope :by_check_item, lambda {|ord| joins(:check_item).order("LOWER(check_items.name) #{ord}") }

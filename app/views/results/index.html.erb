@@ -1,11 +1,11 @@
 <table class="table table-striped">
 	<thead>
     <tr>
-      <th><%= link_to "Room", results_path(:sort_by => "room", :ord => @order)  %></th>
-      <th><%= link_to "Area", results_path(:sort_by => "area", :ord => @order)  %></th>
-			<th><%= link_to "Check Item", results_path(:sort_by => "check_item", :ord => @order)  %></th>
-      <th><%= link_to "Comment", results_path(:sort_by => "comment", :ord => @order)  %></th>
-      <th><%= link_to "Severity", results_path(:sort_by => "severity", :ord => @order)  %></th>
+		<th><%= link_to "Room", results_path(:sort_by => "room", :ord => @order)  %></th>
+		<th><%= link_to "Area", results_path(:sort_by => "area", :ord => @order)  %></th>
+		<th><%= link_to "Check Item", results_path(:sort_by => "check_item", :ord => @order)  %></th>
+		<th><%= link_to "Comment", results_path(:sort_by => "comment", :ord => @order)  %></th>
+		<th><%= link_to "Severity", results_path(:sort_by => "severity", :ord => @order)  %></th>
     </tr>
   </thead>
 	<tbody>
@@ -14,7 +14,7 @@
 			<td><%= link_to(result.check_item.check_list.name, check_list_path(result.check_item.check_list.id)) %></td>
 			<td><%= result.check_item.area %></td>
 			<td><%= result.check_item.name %></td>
-			<td><%= link_to result.comment.nil? ? "Problem reported" : result.comment, edit_result_path(result) %></td>
+			<td><%= link_to result.comment.nil? ? "(none)" : result.comment, edit_result_path(result) %></td>
 			<td><%= define_severity(result.severity) %></td>
 		</tr>
 <% end %>
