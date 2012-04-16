@@ -4,4 +4,4 @@ The current offline process is that a room checker user goes to a given room wit
 
 The Roomcheck application speeds up this process by allowing multiple checkoffs, Siri voice entered descriptions, and automated results outputs for Maintenance and Senior Management.
 
-Current heroku deployment of app: http://radiant-window-8865.herokuapp.com
+Current heroku deployment of app: http://roomcheck.herokuapp.com
