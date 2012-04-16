@@ -10,6 +10,7 @@
   <%= csrf_meta_tags %>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<%=  yield :head %>
+	<%= favicon_link_tag %>
 </head>
 <body>
 <div class="navbar navbar-fixed-top">
@@ -27,6 +28,8 @@
 					<li><%= link_to "Checks", check_item_templates_path %></li>
 					<li><%= link_to "Problems", results_path %></li>
 					<%= yield :nav %>
+				</ul>
+				<ul class="nav pull-right">
 					<li class="divider-vertical"></li>
 					<li><%= link_to("Logout", destroy_user_session_path, :method => 'DELETE') if user_signed_in? %></li>
 				</ul>
