@@ -19,18 +19,15 @@ module CheckListHelper
   def link_to_problem(check_item_id)
     result = Result.find_by_check_item_id_and_completed_on(check_item_id, nil)
 
-    if result && result.severity > 0
-      link_to("Edit Problem", edit_result_path(:id => result.id), :class => "btn btn-info")
+    if result
+      if result.severity > 0
+        link_to("Edit Problem", edit_result_path(:id => result.id), :class => "btn btn-info")
+      else
+        link_to("Report Problem", edit_result_path(:id => result.id), :class => "btn btn-success")
+      end
     else
-      result && result.severity == 0 ? style = "success" : style = "warning"
-      link_to("Report Problem", new_result_path(:check_item_id => check_item_id), :class => "btn btn-#{style}")
-    end   
+      link_to("Report Problem", new_result_path(:check_item_id => check_item_id), :class => "btn btn-warning")
+    end
   end
-  
-    
-  def disable_checkbox(check_item_id)
-    result = Result.find_by_check_item_id_and_completed_on(check_item_id, nil)    
-    result && result.severity > 0 ? true : false
-  end
-    
+      
 end

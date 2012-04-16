@@ -10,15 +10,16 @@ class CheckListsController < ApplicationController
     @checkitemtemplatescount = CheckItemTemplate.count
     
     if(params[:clean])
-      logger.info "\tCLEAN UP LIST!!!!!\n"
       @checkitems.each do |item|
-        logger.info "\tLOOPED #{item.id}\n"
         item.results.find_all_by_completed_on_and_severity(nil, 0).each do |result| 
           result.completed_on = Time.now()
           result.save
           flash[:notice] = "OK's have been reset."
         end
       end
+
+      flash[:warning] = "No checks found that were marked as OK" unless flash[:notice]
+      redirect_to(check_list_path(:check_list_id => params[:id]))
     end
   end
 

@@ -40,7 +40,7 @@ function reorderRows(value) {
 			<tr>
 				<td colspan="4">
 				<%= submit_tag("Reorder Checks", :class => 'btn btn-primary btn-large', :id => 'submit') %>
-				<%= link_to("Mark Unchecked as OK", result_path(:check_list_id => @checklist.id, :markasok => true), :method => "put", :class => "btn btn-warning btn-large") %>
+				<%= link_to("Mark Unchecked as OK", results_path(:check_list_id => @checklist.id, :markasok => true), :method => "post", :class => "btn btn-warning btn-large") %>
 				</td>
 			</tr>
 		<% end %>
