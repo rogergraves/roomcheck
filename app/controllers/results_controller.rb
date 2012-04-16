@@ -62,16 +62,22 @@ class ResultsController < ApplicationController
   end
 
   def update
-    @result = Result.find(params[:id])
-    if @result.update_attributes(params[:result])
-      redirect_to(check_list_path(@result.check_item.check_list_id), :notice => "Saved")
+    if(params[:markasok])
+      logger.info "\n\nMARK AS OK HERE!!!\n\n"
+      checked_as_ok = 0
+      redirect_to(check_list_path(params[:check_list_id]), :notice => "#{checked_as_ok} items checked as OK")
     else
-      errormessages = ""
-      @result.errors.full_messages.each do |e|
-        errormessages += ", " if errormessages.length > 0
-        errormessages += e
+      @result = Result.find(params[:id])
+      if @result.update_attributes(params[:result])
+        redirect_to(check_list_path(@result.check_item.check_list_id), :notice => "Saved")
+      else
+        errormessages = ""
+        @result.errors.full_messages.each do |e|
+          errormessages += ", " if errormessages.length > 0
+          errormessages += e
+        end
+        redirect_to(check_lists_path, :notice => "Errors occurred: #{errormessages}")
       end
-      redirect_to(check_lists_path, :notice => "Errors occurred: #{errormessages}")
     end
   end
 # CHECKCHECK look at destroy method - does it destroy?

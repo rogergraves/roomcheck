@@ -48,27 +48,24 @@ class CheckListsController < ApplicationController
   end
   
   def update
-    order = params[:order]
-    new_order = order.split("X")
-    
+
+    new_order = params[:check_item].sort_by { |check_item_id, order| order }
+    logger.info "\n\n#{new_order.to_s}\n\n"
+
     order_hash = {}
     i = 1
     new_order.each do |check_item_id|
-      order_hash[check_item_id] = i
+      order_hash[check_item_id[0]] = i
       i += 1
     end
-    
+
     checkitems = CheckItem.find_all_by_check_list_id(CheckItem.find_by_id(order_hash.keys[0]).check_list_id)
     checkitems.each do |check_item|
       check_item.item_order = order_hash[check_item.id.to_s]
       check_item.save
     end
     
-    # BUGBUG -- This isn't working, when the AJAX calls it's returning a 500 error. We want it to return nothing!
-    respond_to do |format|
-      format.html
-      format.js { render :layout => false }
-    end
+    redirect_to(check_list_path(params[:check_list_id].first[0]))
   end
 
   def clone

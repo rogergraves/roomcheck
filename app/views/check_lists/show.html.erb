@@ -1,29 +1,8 @@
 <% content_for :head do %>
 <script language="javascript">
-function checkAll(check_everything, form_obj) {
-    for(var i = 0; i < form_obj.length; ++i) {
-        if(form_obj[i].type == "checkbox") {
-            if(form_obj[i].disabled == false) {
-                form_obj[i].checked = check_everything;
-            }
-        }
-    }
-	toggleSubmitButton(form_obj)
+function reorderRows(value) {
+	alert("reorderRows("+value+") called")
 }
-
-function toggleSubmitButton(form_obj) {
-	var nothing_checked = true;
-	for(var i = 0; i < form_obj.length; ++i) {
-		if(form_obj[i].type == "checkbox") {
-            if(form_obj[i].checked == true) {
-                nothing_checked = false;
-            }
-        }
-	}
-	
-	form_obj.submit.disabled = nothing_checked;
-}
-
 </script>
 <% end %>
 
@@ -36,12 +15,12 @@ function toggleSubmitButton(form_obj) {
 
 <table id="CheckItemTable" class="table table-striped">
     <% if @checkitems.length > 0 %>
-		<%= form_tag(results_path, :method => "post", :name => "makeok") do %>
+		<%= form_tag(check_list_path, :method => "put", :name => "reorder") do %>
 			<%= hidden_field(:check_list_id, @checklist.id) %>
 			<% if @checkitems.length > 1 %>
 				<thead>
 					<tr>
-						<th><%= check_box_tag('check_all', 'check_all', false, :onClick => "checkAll(this.checked, document.makeok);") %></th>
+						<th>Order</th>
 						<th>Check</th>
 						<th>Status</th>
 						<th>Action</th>
@@ -50,42 +29,25 @@ function toggleSubmitButton(form_obj) {
 			<% end %>
 			<tbody>
 			<% @checkitems.each do |check_item| %>
-				<tr id="<%= check_item.id %>">
-					<td><%= check_box_tag("results[#{check_item.id}]", true, false, :disabled => disable_checkbox(check_item.id), :onClick => "toggleSubmitButton(document.makeok);") %></td>
+				<tr>
+					<td><%= text_field(:check_item, check_item.id, {:value => check_item.item_order, :style => "width: 1.5em;"}) %></td>
 					<td><%= check_item.name %> in <%= check_item.area %> <%= link_to "", edit_check_item_path(check_item), :class => "icon-pencil" %></td>
 					<td><%= describe_problem(check_item.id) %></td>
 					<td><%= link_to_problem(check_item.id).html_safe %></td>
 				</tr>
 			<% end %>
 			</tbody>
-			<tr><td colspan="4"><%= submit_tag("Mark selected as OK", :confirm => 'Are you sure?', :class => 'btn btn-primary btn-large', :disabled => true, :id => 'submit') %></td></tr>
+			<tr>
+				<td colspan="4">
+				<%= submit_tag("Reorder Checks", :class => 'btn btn-primary btn-large', :id => 'submit') %>
+				<%= link_to("Mark Unchecked as OK", result_path(:check_list_id => @checklist.id, :markasok => true), :method => "put", :class => "btn btn-warning btn-large") %>
+				</td>
+			</tr>
 		<% end %>
 	<% end %>
 
 </table>
 
-<script type="text/javascript">
-$(document).ready(function() {
-	$('#CheckItemTable').tableDnD({
-	  onDrop: function(table, row) {
-			var new_order = new Array()
-
-			var rows = table.tBodies[0].rows;
-			for(var i = 0; i < rows.length; ++i) {
-				new_order.push(rows[i].id)
-			}
-
-		  $.ajax({
-			  type: "PUT",
-			  url: "/check_lists/<%=@checklist.id %>?order="+new_order.join('X'),
-				datatype: 'json'
-			}).done(function( msg ) {
-			  //alert( "Data Saved: " + msg );
-			});
-	  }
-	});
-});
-</script>
 <br/>
 <br/>
 <% if @checkitems.length == 0 && (@checkitemtemplatescount > 0 || @checklists.count > 0) %>
