@@ -1,10 +1,42 @@
 <% content_for :head do %>
 <script language="javascript">
-function reorderRows(value) {
-	alert("reorderRows("+value+") called")
-}
+$(document).ready(
+     function(){
+		var ids = $('a[id]').map(function() {
+		    return this.id;
+		}).get();
+			
+		for(var i = 0; i < ids.length; ++i){
+			var id_name = ids[i];
+			if(id_name.substr(0, 11) == "resultpopup") {
+				$("a#"+id_name).bind("ajax:success",
+	                   function(evt, data, status, xhr){
+	                        //this assumes the action returns an HTML snippet
+	                        $("div#myModal").html(data);
+							$("div#myModal").modal('show');
+
+	           }).bind("ajax:error", function(evt, data, status, xhr){
+	                    //do something with the error here
+	                    $("div#errors p").text(data);
+						console.log(data)
+
+	           });
+				
+			}
+
+		}
+		
+		
+
+	
+
+});
+
+
 </script>
 <% end %>
+<div id="myModal" class="modal hide fade" style="display: none;"></div>
+<div id="errors"></div>
 
 <h1>Room: <%= @checklist.name %></h1>
 <p>
@@ -12,6 +44,8 @@ function reorderRows(value) {
 <%= link_to("Clear OK's", check_list_path(:check_list_id => params[:id], :clean => 'true'), :class => "btn btn-primary btn-small") %>
 <%= link_to("Delete Room", check_list_path(:check_list_id => params[:id]), confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger btn-small") %>
 </p>
+
+
 
 <table id="CheckItemTable" class="table table-striped">
     <% if @checkitems.length > 0 %>

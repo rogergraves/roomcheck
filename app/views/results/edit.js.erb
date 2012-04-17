@@ -1,0 +1,31 @@
+<%= form_for (@result) do |f| %>
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">×</a>
+		<h3>Edit Problem: <%= @result.check_item.name %></h3>
+	</div>
+	<div class="modal-body">
+	<p>
+	
+		<% @result.errors.full_messages.each do |msg|  %>
+		    <p><%= msg %></p>
+		<% end %>
+
+		<%= f.label :comment, 'Describe problem'  %>
+		<%= f.text_field :comment %>
+		<br/><br/>
+		<%= f.label :severity  %>
+		<%= f.select :severity, options_for_select([[define_severity(0),"0"], [define_severity(1),"1"], [define_severity(2),"2"], [define_severity(3),"3"], [define_severity(4),"4"], [define_severity(5),"5"]], :selected => @result.severity) %>
+		<br/>
+		<%= f.hidden_field :check_item_id %>
+
+		
+
+		</p>
+		</div>
+		<div class="modal-footer">
+		<%= link_to "Close", check_list_path(@result.check_item.check_list.id), :class => "btn" %>
+		<%= f.submit "Save changes", :class => "btn btn-primary" %>
+		<br /> 
+		<%= link_to("Problem Fixed", result_path(:result_id => @result.id), :method => 'DELETE', :confirm => 'Are you sure?', :class => "btn btn-success") if @result.severity > 0 %>
+	</div>
+<% end %>	
