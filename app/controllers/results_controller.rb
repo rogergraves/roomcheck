@@ -71,7 +71,8 @@ class ResultsController < ApplicationController
       redirect_to(check_lists_path+"#check_item_#{@result.check_item_id}", :notice => "Errors occurred: #{errormessages}")
     end
   end
-# CHECKCHECK look at destroy method - does it destroy?
+
+  # CHECKCHECK look at destroy method - does it destroy?
   def destroy
      @result = Result.find_by_id(params[:id])
      @result.completed_on = Time.now

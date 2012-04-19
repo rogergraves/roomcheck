@@ -49,14 +49,14 @@ class CheckListsController < ApplicationController
   end
   
   def update
-
-    new_order = params[:check_item].sort_by { |check_item_id, order| order }
+  
+    new_order = params[:check_item].map {|e1, e2| [e1.to_i, e2.to_i]}.sort_by { |check_item_id, order| order }
     logger.info "\n\n#{new_order.to_s}\n\n"
 
     order_hash = {}
     i = 1
     new_order.each do |check_item_id|
-      order_hash[check_item_id[0]] = i
+      order_hash[check_item_id[0].to_s] = i
       i += 1
     end
 
