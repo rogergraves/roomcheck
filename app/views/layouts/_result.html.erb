@@ -35,7 +35,7 @@ $(function() {
 <% end %>
 
 <%= f.label :comment, 'Describe problem'  %>
-<%= f.text_field :comment %>
+<%= f.text_area :comment, :size => "100x5" %>
 <br/><br/>
 <%= f.label :severity  %>
 <%= f.select :severity, options_for_select([[define_severity(0),"0"], [define_severity(1),"1"], [define_severity(2),"2"], [define_severity(3),"3"], [define_severity(4),"4"], [define_severity(5),"5"]], :selected => @result.severity) %>
