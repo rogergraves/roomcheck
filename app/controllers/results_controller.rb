@@ -25,7 +25,6 @@ class ResultsController < ApplicationController
 
   def create
     if(params[:markasok])
-      logger.info "\n\nMARK AS OK HERE (create)!!! params[:markasok]: #{params[:markasok]}, params[:check_list_id]): #{params[:check_list_id]}\n\n"
       checked_as_ok = 0
 
       check_items = CheckItem.find_all_by_check_list_id(params[:check_list_id])
@@ -43,7 +42,7 @@ class ResultsController < ApplicationController
     else    
       @result = Result.new(params[:result])
       if @result.save
-        redirect_to(check_list_path(@result.check_item.check_list_id), :notice => "Saved")
+        redirect_to(check_list_path(@result.check_item.check_list_id)+"#check_item_#{@result.check_item_id}", :notice => "Saved")
       else
         errormessages = ""
         @result.errors.full_messages.each do |e|
@@ -62,14 +61,14 @@ class ResultsController < ApplicationController
   def update
     @result = Result.find(params[:id])
     if @result.update_attributes(params[:result])
-      redirect_to(check_list_path(@result.check_item.check_list_id), :notice => "Saved")
+      redirect_to(check_list_path(@result.check_item.check_list_id)+"#check_item_#{@result.check_item_id}", :notice => "Saved")
     else
       errormessages = ""
       @result.errors.full_messages.each do |e|
         errormessages += ", " if errormessages.length > 0
         errormessages += e
       end
-      redirect_to(check_lists_path, :notice => "Errors occurred: #{errormessages}")
+      redirect_to(check_lists_path+"#check_item_#{@result.check_item_id}", :notice => "Errors occurred: #{errormessages}")
     end
   end
 # CHECKCHECK look at destroy method - does it destroy?
@@ -78,7 +77,7 @@ class ResultsController < ApplicationController
      @result.completed_on = Time.now
      @result.save
      
-     redirect_to(check_list_path(@result.check_item.check_list_id), :notice => "Problem solved")
+     redirect_to(check_list_path(@result.check_item.check_list_id)+"#check_item_#{@result.check_item_id}", :notice => "Problem solved")
   end
 
   def show

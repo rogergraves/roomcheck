@@ -21,12 +21,12 @@ module CheckListHelper
 
     if result
       if result.severity > 0
-        link_to("Edit Problem", edit_result_path(:id => result.id), :class => "btn btn-info")
+        link_to("Edit Problem", edit_result_path(:id => result.id), :class => "btn btn-info", :name => "check_item_#{check_item_id}")
       else
-        link_to("Report Problem", edit_result_path(:id => result.id), :class => "btn btn-success")
+        link_to("Report Problem", edit_result_path(:id => result.id), :class => "btn btn-success", :name => "check_item_#{check_item_id}")
       end
     else
-      link_to("Report Problem", new_result_path(:check_item_id => check_item_id), :class => "btn btn-warning")
+      link_to("Report Problem", new_result_path(:check_item_id => check_item_id), :class => "btn btn-warning", :name => "check_item_#{check_item_id}")
     end
   end
       

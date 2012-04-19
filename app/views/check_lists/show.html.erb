@@ -1,8 +1,16 @@
 <% content_for :head do %>
 <script language="javascript">
-function reorderRows(value) {
-	alert("reorderRows("+value+") called")
-}
+
+$(document).ready(function () {
+	qs = new String(window.location);
+
+	if(qs.indexOf("#", 0) > 0) { // anchor tag is used
+		window.scrollBy(0,-40); // offset to take into account the nav bar
+	}
+});
+
+
+
 </script>
 <% end %>
 
