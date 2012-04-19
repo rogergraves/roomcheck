@@ -71,12 +71,13 @@ class CheckListsController < ApplicationController
 
   def clone
     checks_from_clone = CheckItem.find_all_by_check_list_id(params[:clone_check_list_id])
+    list = []
     checks_from_clone.each do |check_item|
       CheckItem.create({
         name: check_item.name,
         area: check_item.area,
         check_list_id: params[:check_list_id],
-        item_order: check_item.item_order,
+        item_order: check_item.item_order
       })
     end
     
