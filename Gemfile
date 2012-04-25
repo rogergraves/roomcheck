@@ -5,6 +5,7 @@ gem 'heroku', '~> 2.21.3'
 gem "devise", "~> 2.0.4"
 gem "twitter-bootstrap-rails", "~> 2.0.6"
 gem "carrierwave", "~> 0.6.2"
+gem "rmagick", "~> 2.13.1"
 
 # Gems used only for assets and not required
 # in production environments by default.
