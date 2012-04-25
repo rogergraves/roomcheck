@@ -49,7 +49,8 @@ class ResultsController < ApplicationController
           errormessages += ", " if errormessages.length > 0 
           errormessages += e
         end
-        redirect_to(check_lists_path, :notice => "Errors occurred: #{errormessages}")
+        flash[:error] = "Errors occurred: #{errormessages}"
+        redirect_to(check_lists_path)
       end   
     end
   end
@@ -68,7 +69,8 @@ class ResultsController < ApplicationController
         errormessages += ", " if errormessages.length > 0
         errormessages += e
       end
-      redirect_to(check_lists_path+"#check_item_#{@result.check_item_id}", :notice => "Errors occurred: #{errormessages}")
+      flash[:error] = "Errors occurred: #{errormessages}"
+      redirect_to(edit_result_path(@result.id))
     end
   end
 
@@ -76,6 +78,7 @@ class ResultsController < ApplicationController
   def destroy
      @result = Result.find_by_id(params[:id])
      @result.completed_on = Time.now
+     @result.remove_image!
      @result.save
      
      redirect_to(check_list_path(@result.check_item.check_list_id)+"#check_item_#{@result.check_item_id}", :notice => "Problem solved")

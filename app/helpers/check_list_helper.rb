@@ -6,7 +6,7 @@ module CheckListHelper
        result.comment.nil? ? problem = "#{define_severity(result.severity)} problem reported" : problem = result.comment[0..50]
        problem += '...' if problem != result.comment && !result.comment.nil?
        problem += " (#{define_severity(result.severity)})"
-       problem += " <i class='icon-picture'></i>".html_safe unless result.image.nil? || result.image.blank?
+       problem += " <i class='icon-picture'></i>".html_safe if result.image?
     
        return problem
     elsif result && result.severity == 0
