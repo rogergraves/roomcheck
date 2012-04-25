@@ -1,4 +1,7 @@
 class Result < ActiveRecord::Base
+  attr_accessible :comment, :severity, :check_item_id, :image
+  mount_uploader :image, ImageUploader
+  
   validates :check_item_id, :presence => true
   validates :severity, :presence => true
   validates_inclusion_of :severity, :in => 0..5

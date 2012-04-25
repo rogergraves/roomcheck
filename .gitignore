@@ -16,3 +16,6 @@
 
 # Ignore annoying mac invisible files
 /.DS_Store
+
+# Ignore uploaded images
+/public/uploads/*

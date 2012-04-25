@@ -28,7 +28,7 @@ $(function() {
 
 
 <div class="severity">
-<%= form_for (@result) do |f| %>
+<%= form_for(@result, :html => {:multipart => true}) do |f| %>
 
 <% @result.errors.full_messages.each do |msg|  %>
     <p><%= msg %></p>
@@ -40,6 +40,9 @@ $(function() {
 <%= f.label :severity  %>
 <%= f.select :severity, options_for_select([[define_severity(0),"0"], [define_severity(1),"1"], [define_severity(2),"2"], [define_severity(3),"3"], [define_severity(4),"4"], [define_severity(5),"5"]], :selected => @result.severity) %>
 <br/>
+ <%= f.file_field :image %>
+<br/>
+
 <%= f.hidden_field :check_item_id %>
 
 <%= f.submit "Save", :class => "btn btn-primary" %> <%= link_to "Cancel", check_list_path(@result.check_item.check_list.id)+"#check_item_#{@result.check_item_id}", :class => "btn" %>
