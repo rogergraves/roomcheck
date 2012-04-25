@@ -1,3 +1,5 @@
+<%= image_tag(@result.image_url().to_s, :align => 'right') unless @result.image.nil? || @result.image.blank? %>
+
 <h1>Edit Problem: <%= @result.check_item.name %></h1>
 
 <%= render :partial => 'layouts/result' %>
