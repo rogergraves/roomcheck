@@ -53,10 +53,14 @@ class ResultsController < ApplicationController
         redirect_to(check_lists_path)
       end   
     end
+    logger.info("\n\n!!!!!!!!!\nPARAMS: #{params.inspect}\n!!!!!!!!!\n")
+    
   end
 
   def edit    
     @result = Result.find_by_id(params[:id])
+    logger.info("\n\n!!!!!!!!!\nPARAMS: #{params.inspect}\n!!!!!!!!!\n")
+   
   end
 
   def update
