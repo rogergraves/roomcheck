@@ -1,4 +1,4 @@
-<%= image_tag(@result.image_url().to_s, :align => 'right') if @result.image? %>
+<%= image_tag(@result.image_url().to_s+"?#{Random.rand(10000000)}", :align => 'right') if @result.image? %>
 
 <h1>Edit Problem: <%= @result.check_item.name %></h1>
 
