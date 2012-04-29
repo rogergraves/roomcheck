@@ -55,12 +55,21 @@ function setButton() {
 	                                         	'returnServerResponse'	: escape('true'),
 												'postValues'			: escape(postValues)
 	});
+	
+	$("#result_image").addClass('btn btn-primary');
 }
 
 $(document).ready(function () {
-	$('#result_severity').change(setButton);
-	$('#result_comment').change(setButton);
-	setButton();
+	var deviceAgent = navigator.userAgent.toLowerCase();
+	$iOS = deviceAgent.match(/(iphone|ipod|ipad)/);
+	
+	if($iOS) {
+		$('#file_browse_button').addClass('alert alert-error');
+		$('#file_browse_button').append('<br /><br />This requires Picup to be installed on your device. <a href="http://itunes.apple.com/us/app/picup/id354101378?mt=8" target="_new">Click here</a> to install app.');		
+		$('#result_severity').change(setButton);
+		$('#result_comment').change(setButton);
+		setButton();
+	}
 });
 
 </script>
@@ -85,7 +94,9 @@ $(document).ready(function () {
 <%= f.label :severity  %>
 <%= f.select :severity, options_for_select([[define_severity(0),"0"], [define_severity(1),"1"], [define_severity(2),"2"], [define_severity(3),"3"], [define_severity(4),"4"], [define_severity(5),"5"]], :selected => @result.severity) %>
 <br/>
+<div id="file_browse_button">
  <%= f.file_field :image %>
+</div>
 <br/>
 
 <%= f.hidden_field :check_item_id %>
@@ -93,4 +104,5 @@ $(document).ready(function () {
 <%= f.submit "Save", :class => "btn btn-primary" %> <%= link_to "Cancel", check_list_path(@result.check_item.check_list.id)+"#check_item_#{@result.check_item_id}", :class => "btn" %>
 <% end %>
 </div>
+
  
