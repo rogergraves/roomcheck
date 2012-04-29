@@ -91,7 +91,7 @@ class ResultsController < ApplicationController
   end
 
   def show
-    logger.info "\n\n!!!!!!!!!!!!!\nPARAMS: #{params.inspect}\n!!!!!!!!!!!!!!!!!\n\n"
+    logger.info "\n\nResultsController#show\n!!!!!!!!!!!!!\nPARAMS: #{params.inspect}\n!!!!!!!!!!!!!!!!!\n\n"
     if(params[:serverResponse])
       redirect_to(edit_result_path(params[:serverResponse]))
     else
