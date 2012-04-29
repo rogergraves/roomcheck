@@ -1,4 +1,6 @@
 class ResultsController < ApplicationController
+  before_filter :authenticate_user!
+  
   def index
     
     @order = params[:ord] == 'desc' ? 'asc' : 'desc'
@@ -89,6 +91,12 @@ class ResultsController < ApplicationController
   end
 
   def show
+    logger.info "\n\n!!!!!!!!!!!!!\nPARAMS: #{params.inspect}\n!!!!!!!!!!!!!!!!!\n\n"
+    if(params[:serverResponse])
+      redirect_to(edit_result_path(params[:serverResponse]))
+    else
+      redirect_to(check_lists_path)
+    end
   end
 end
 

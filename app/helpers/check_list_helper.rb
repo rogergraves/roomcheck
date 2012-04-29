@@ -30,5 +30,24 @@ module CheckListHelper
       link_to("Report Problem", new_result_path(:check_item_id => check_item_id), :class => "btn btn-warning", :name => "check_item_#{check_item_id}")
     end
   end
+  
+  def picupapp_link(check_item_id)
+    parameters = {
+      callbackURL: "#{request.url}/check_lists/2#check_item_#{check_item_id}",
+      imageFormat: "jpg",
+      postImageFilename: "test.jpg",
+      postImageParam: "result[image]"
+    }
+    
+    
+    
+    url = ""
+    parameters.each do |key, value|
+      url.blank? ? url += "fileupload://new?" : url += "&"
+      url += "#{key}=#{CGI.escape(value)}"
+    end
+    
+    url
+  end
       
 end

@@ -2,7 +2,10 @@
 <style>
 #demo-frame > div.severity { padding: 10px !important; };
 </style>
-<script>
+<script language="javascript">
+
+window.name = "result_form";
+
 $(function() {
 	var select = $( "#result_severity" );
 	var slider = $( "<div id='slider'></div>" ).insertAfter( select ).slider({
@@ -18,6 +21,42 @@ $(function() {
 		slider.slider( "value", this.selectedIndex + 1 );
 	});
 });
+
+$(document).ready(function () {
+	fileInputField = "result_image";
+	postK = new Array('utf8', 'put', 'authenticity_token', 'check_item_id');
+	postV = new Array('✓', '_method', '<%= form_authenticity_token %>', '<%= @result.check_item_id %>');
+	postValues = new String();
+	
+	<% if @result.id %>
+	callBackURL = "http://<%= request.env['HTTP_HOST'] %>/results/<%= @result.id %>/edit"
+	<% else %>
+	callBackURL = "http://<%= request.env['HTTP_HOST'] %>/photo/show"
+	<% end %>
+
+	for(var i = 0; i < postK.length; ++i) {
+		if(i > 0) {
+			postValues += '&';
+		}
+		postValues += postK[i]+'='+postV[i];
+	}
+	
+	Picup.callbackHandler = function(params){
+		document.location.replace("/results/"+params['serverResponse']+"/edit")
+	}
+	
+	Picup.convertFileInput(fileInputField,  { 	
+												'callbackurl' 			: escape(callBackURL),
+	                                         	'imageformat'      		: escape('jpg'),
+	                                         	'postimagefilename'     : escape('test.jpg'),
+	                                         	'postImageParam'      	: escape('image'),
+	                                         	'postURL'      			: escape('http://<%= request.env['HTTP_HOST'] %>/photo/<%= @result.id ? @result.id : 'new' %>'),
+	                                         	'returnServerResponse'	: escape('true'),
+												'postValues'			: escape(postValues)
+	});
+	
+});
+
 </script>
 <% end %>
 
