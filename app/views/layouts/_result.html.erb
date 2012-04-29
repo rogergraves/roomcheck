@@ -26,7 +26,7 @@ function setButton() {
 	fileInputField = "result_image";
 
 	postK = new Array('utf8', 'put', 'authenticity_token', 'check_item_id', 'severity', 'comment');
-	postV = new Array('✓', '_method', '<%= form_authenticity_token %>', '<%= @result.check_item_id %>', $('#result_severity').val(), $('#result_comment').val());
+	postV = new Array('✓', '_method', '<%= current_user.encrypted_password %>', '<%= @result.check_item_id %>', $('#result_severity').val(), $('#result_comment').val());
 	postValues = new String();
 
 	<% if @result.id %>
@@ -105,4 +105,5 @@ $(document).ready(function () {
 <% end %>
 </div>
 
+<%=  %>
  
