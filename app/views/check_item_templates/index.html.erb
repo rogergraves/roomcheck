@@ -2,27 +2,30 @@
 <p>All items can be added to any new room as a default template item</p>
 <p><%= link_to 'New Default Check', new_check_item_template_path, :class => "btn btn-primary" %></p>
 
-<table id="CheckItemTemplateTable" cellspacing='0' cellpadding='2' class="table">
-	<thead>
-		<tr>
-			<th align="left">Name</th>
-			<th align="left">Area</th>
-			<th></td>
-		</tr>
-	</thead>
-	<tbody>
-		<% @check_item_templates.each do |check_item_template| %>
-		   <tr id="<%=check_item_template.id%>">
-				<td><%= check_item_template.name %></td>
-				<td><%= check_item_template.area %></td>
-				<td>
-					<%= link_to 'Edit', edit_check_item_template_path(check_item_template), :class => "btn btn-primary btn-mini" %>
-					<%= link_to 'Delete', check_item_template, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger btn-mini" %>
-				</td>
-		  </tr>
-		<% end %>
-	</tbody>
-</table>
+<% if check_item_templates.length > 0 %>
+	<table id="CheckItemTemplateTable" class="table table-striped">
+		<thead>
+			<tr>
+				<th align="left">Order</th>
+				<th align="left">Check</th>
+				<th align="left">Action</td>
+			</tr>
+		</thead>
+		<tbody>
+			<% @check_item_templates.each do |check_item_template| %>
+			   <tr id="<%=check_item_template.id%>">
+					<td><%= check_item_template.item_order %>
+					<td><%= check_item_template.name %> (<%= check_item_template.area %>)</td>
+					<td>
+						<%= link_to 'Edit', edit_check_item_template_path(check_item_template), :class => "btn btn-primary" %>
+						<%= link_to 'Delete', check_item_template, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %>
+					</td>
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
+	
+<% end %>
 
 <script type="text/javascript">
 $(document).ready(function() {
