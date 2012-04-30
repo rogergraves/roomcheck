@@ -2,52 +2,32 @@
 <p>All items can be added to any new room as a default template item</p>
 <p><%= link_to 'New Default Check', new_check_item_template_path, :class => "btn btn-primary" %></p>
 
-<% if check_item_templates.length > 0 %>
-	<table id="CheckItemTemplateTable" class="table table-striped">
-		<thead>
-			<tr>
-				<th align="left">Order</th>
-				<th align="left">Check</th>
-				<th align="left">Action</td>
-			</tr>
-		</thead>
-		<tbody>
-			<% @check_item_templates.each do |check_item_template| %>
-			   <tr id="<%=check_item_template.id%>">
-					<td><%= check_item_template.item_order %>
-					<td><%= check_item_template.name %> (<%= check_item_template.area %>)</td>
-					<td>
-						<%= link_to 'Edit', edit_check_item_template_path(check_item_template), :class => "btn btn-primary" %>
-						<%= link_to 'Delete', check_item_template, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %>
-					</td>
-			  </tr>
-			<% end %>
-		</tbody>
-	</table>
-	
+<% if @check_item_templates.length > 0 %>
+	<%= form_tag(reorder_check_item_templates_path, :method => "put", :name => "reorder") do %>
+		<table id="CheckItemTemplateTable" class="table table-striped">
+			<thead>
+				<tr>
+					<th align="left">Order</th>
+					<th align="left">Check</th>
+					<th align="left">Action</td>
+				</tr>
+			</thead>
+			<tbody>
+				<% @check_item_templates.each do |check_item_template| %>
+				   <tr id="<%=check_item_template.id%>">
+						<td><%= text_field(:check_item_template, check_item_template.id, {:value => check_item_template.item_order, :style => "width: 1.5em;"}) %></td>
+						<td><%= check_item_template.name %> (<%= check_item_template.area %>)</td>
+						<td>
+							<%= link_to 'Edit', edit_check_item_template_path(check_item_template), :class => "btn btn-primary" %>
+							<%= link_to 'Delete', check_item_template, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %>
+						</td>
+				  </tr>
+				<% end %>
+			</tbody>
+		</table>
+		<%= submit_tag("Reorder Checks", :class => 'btn btn-primary btn-large', :id => 'submit') %>
+	<% end %>
 <% end %>
-
-<script type="text/javascript">
-$(document).ready(function() {
-	$('#CheckItemTemplateTable').tableDnD({
-	  onDrop: function(table, row) {
-	  			var new_order = new Array()
-	  			var rows = table.tBodies[0].rows;
-	  			for(var i = 0; i < rows.length; ++i) {
-	  				new_order.push(rows[i].id)
-	  			}
-	  			
-	  		  $.ajax({
-	  			  type: "PUT",
-	  			  url: "/check_item_templates/reorder?order="+new_order.join('X'),
-	  				datatype: 'json'
-	  			}).done(function( msg ) {
-	  			  // alert( "Data Saved: " + msg );
-	  			});
-	  }
-	});
-});
-</script>
 
 
 
