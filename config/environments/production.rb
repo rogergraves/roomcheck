@@ -66,5 +66,5 @@ Roomcheck::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   # Added for devise gem (need to set host to whatever URL is being used)
-  config.action_mailer.default_url_options = { :host => 'http://radiant-window-8865.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'http://roomcheck.herokuapp.com' }
 end
