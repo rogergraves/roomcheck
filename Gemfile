@@ -5,6 +5,9 @@ gem 'heroku', '~> 2.21.3'
 gem "devise", "~> 2.0.4"
 gem "twitter-bootstrap-rails", "~> 2.0.6"
 gem "carrierwave", "~> 0.6.2"
+gem "rmagick", "~> 2.13.1"
+gem 'pg', '0.12.2'
+gem "therubyracer", "~> 0.10.1"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -35,9 +38,6 @@ group :development do
   gem 'annotate' 
 end
 
-group :production do
-  gem 'pg', '0.12.2'
-end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
