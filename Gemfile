@@ -7,6 +7,7 @@ gem "twitter-bootstrap-rails", "~> 2.0.6"
 gem "carrierwave", "~> 0.6.2"
 gem "rmagick", "~> 2.13.1"
 gem 'pg'
+gem "taps", "~> 0.3.24"
 # gem "therubyracer", "~> 0.10.1"
 
 
