@@ -1,0 +1,30 @@
+<% content_for :head do %>
+<script language="javascript">
+
+var result_id = 0;
+var anchor_value;
+
+var stripped_url = document.location.toString().split("#");
+
+if (stripped_url.length > 1) {
+	anchor_value = stripped_url[1];
+	var pairs = anchor_value.split('&');
+	for(var i = 0; i < pairs.length; ++i) {
+		pair = pairs[i];
+		var arg = pair.split("=");
+		if(arg[0] == 'serverResponse') {
+			result_id = arg[1];
+			break;
+		}
+	}
+}
+
+if(result_id > 0) {
+	document.location.replace("/results/"+result_id+"/edit");
+} else {
+	document.location.replace("/check_items");
+}
+
+
+</script>
+<% end %>

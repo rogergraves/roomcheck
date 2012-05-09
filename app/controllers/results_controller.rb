@@ -1,4 +1,6 @@
 class ResultsController < ApplicationController
+  before_filter :authenticate_user!
+  
   def index
     
     @order = params[:ord] == 'desc' ? 'asc' : 'desc'
@@ -49,13 +51,18 @@ class ResultsController < ApplicationController
           errormessages += ", " if errormessages.length > 0 
           errormessages += e
         end
-        redirect_to(check_lists_path, :notice => "Errors occurred: #{errormessages}")
+        flash[:error] = "Errors occurred: #{errormessages}"
+        redirect_to(check_lists_path)
       end   
     end
+    logger.info("\n\n!!!!!!!!!\nPARAMS: #{params.inspect}\n!!!!!!!!!\n")
+    
   end
 
   def edit    
     @result = Result.find_by_id(params[:id])
+    logger.info("\n\n!!!!!!!!!\nPARAMS: #{params.inspect}\n!!!!!!!!!\n")
+   
   end
 
   def update
@@ -68,7 +75,8 @@ class ResultsController < ApplicationController
         errormessages += ", " if errormessages.length > 0
         errormessages += e
       end
-      redirect_to(check_lists_path+"#check_item_#{@result.check_item_id}", :notice => "Errors occurred: #{errormessages}")
+      flash[:error] = "Errors occurred: #{errormessages}"
+      redirect_to(edit_result_path(@result.id))
     end
   end
 
@@ -76,12 +84,19 @@ class ResultsController < ApplicationController
   def destroy
      @result = Result.find_by_id(params[:id])
      @result.completed_on = Time.now
+     @result.remove_image!
      @result.save
      
      redirect_to(check_list_path(@result.check_item.check_list_id)+"#check_item_#{@result.check_item_id}", :notice => "Problem solved")
   end
 
   def show
+    logger.info "\n\nResultsController#show\n!!!!!!!!!!!!!\nPARAMS: #{params.inspect}\n!!!!!!!!!!!!!!!!!\n\n"
+    if(params[:serverResponse])
+      redirect_to(edit_result_path(params[:serverResponse]))
+    else
+      redirect_to(check_lists_path)
+    end
   end
 end
 

@@ -1,5 +1,11 @@
 Roomcheck::Application.routes.draw do
   
+  get "photos/show"
+
+  get "photos/create"
+
+  get "photo/create"
+
   devise_for :users
 
   resources :check_item_templates do
@@ -16,6 +22,9 @@ Roomcheck::Application.routes.draw do
   resources :results
   resources :check_lists
   resources :check_items
+  
+  match 'photo/:id' => "photos#create", :via => :post
+  match 'photo/show' => "photos#show", :via => :get
 
   root :to => 'check_lists#index'
  

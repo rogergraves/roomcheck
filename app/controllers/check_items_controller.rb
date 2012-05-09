@@ -1,4 +1,6 @@
 class CheckItemsController < ApplicationController
+  before_filter :authenticate_user!
+  
   def new
     @check_item = CheckItem.new
     @check_item.check_list_id = params[:check_list_id]

@@ -1,4 +1,6 @@
 class CheckItemTemplatesController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /check_item_templates
   # GET /check_item_templates.json
   def index

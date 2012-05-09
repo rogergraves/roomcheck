@@ -2,22 +2,60 @@
 <style>
 #demo-frame > div.severity { padding: 10px !important; };
 </style>
-<script>
-$(function() {
-	var select = $( "#result_severity" );
-	var slider = $( "<div id='slider'></div>" ).insertAfter( select ).slider({
-		min: 1,
-		max: 6,
-		range: "min",
-		value: select[ 0 ].selectedIndex + 1,
-		slide: function( event, ui ) {
-			select[ 0 ].selectedIndex = ui.value - 1;
+<script language="javascript">
+
+window.name = "result_form";
+
+function setButton() {
+	fileInputField = "result_image";
+
+	postK = new Array('utf8', 'put', 'authenticity_token', 'check_item_id', 'severity', 'comment');
+	postV = new Array('✓', '_method', '<%= current_user.encrypted_password %>', '<%= @result.check_item_id %>', $('#result_severity').val(), $('#result_comment').val());
+	postValues = new String();
+
+	<% if @result.id %>
+	callBackURL = "http://<%= request.env['HTTP_HOST'] %>/results/<%= @result.id %>/edit"
+	<% else %>
+	callBackURL = "http://<%= request.env['HTTP_HOST'] %>/photo/show"
+	<% end %>
+
+	for(var i = 0; i < postK.length; ++i) {
+		if(i > 0) {
+			postValues += '&';
 		}
+		postValues += postK[i]+'='+postV[i];
+	}
+
+	Picup.callbackHandler = function(params){
+		document.location.replace("/results/"+params['serverResponse']+"/edit")
+	}
+
+	Picup.convertFileInput(fileInputField,  { 	
+												'callbackurl' 			: escape(callBackURL),
+	                                         	'imageformat'      		: escape('jpg'),
+	                                         	'postimagefilename'     : escape('test.jpg'),
+	                                         	'postImageParam'      	: escape('image'),
+	                                         	'postURL'      			: escape('http://<%= request.env['HTTP_HOST'] %>/photo/<%= @result.id ? @result.id : 'new' %>'),
+	                                         	'returnServerResponse'	: escape('true'),
+												'postValues'			: escape(postValues)
 	});
-	$( "#result_severity" ).change(function() {
-		slider.slider( "value", this.selectedIndex + 1 );
-	});
+	
+	$("#result_image").addClass('btn btn-primary');
+}
+
+$(document).ready(function () {
+	var deviceAgent = navigator.userAgent.toLowerCase();
+	$iOS = deviceAgent.match(/(iphone|ipod|ipad)/);
+	
+	if($iOS) {
+		$('#file_browse_button').addClass('alert alert-error');
+		$('#file_browse_button').append('<br /><br />This requires Picup to be installed on your device. <a href="http://itunes.apple.com/us/app/picup/id354101378?mt=8" target="_new">Click here</a> to install app.');		
+		$('#result_severity').change(setButton);
+		$('#result_comment').change(setButton);
+		setButton();
+	}
 });
+
 </script>
 <% end %>
 
@@ -28,7 +66,7 @@ $(function() {
 
 
 <div class="severity">
-<%= form_for (@result) do |f| %>
+<%= form_for(@result, :html => {:multipart => true}) do |f| %>
 
 <% @result.errors.full_messages.each do |msg|  %>
     <p><%= msg %></p>
@@ -40,8 +78,16 @@ $(function() {
 <%= f.label :severity  %>
 <%= f.select :severity, options_for_select([[define_severity(0),"0"], [define_severity(1),"1"], [define_severity(2),"2"], [define_severity(3),"3"], [define_severity(4),"4"], [define_severity(5),"5"]], :selected => @result.severity) %>
 <br/>
+<div id="file_browse_button">
+ <%= f.file_field :image %>
+</div>
+<br/>
+
 <%= f.hidden_field :check_item_id %>
 
 <%= f.submit "Save", :class => "btn btn-primary" %> <%= link_to "Cancel", check_list_path(@result.check_item.check_list.id)+"#check_item_#{@result.check_item_id}", :class => "btn" %>
 <% end %>
-</div><!-- End demo -->
+</div>
+
+<%=  %>
+ 
