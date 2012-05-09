@@ -6,7 +6,7 @@ gem "devise", "~> 2.0.4"
 gem "twitter-bootstrap-rails", "~> 2.0.6"
 gem "carrierwave", "~> 0.6.2"
 gem "rmagick", "~> 2.13.1"
-gem 'pg', '0.12.2'
+gem 'pg'
 # gem "therubyracer", "~> 0.10.1"
 
 
