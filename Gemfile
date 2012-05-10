@@ -38,6 +38,7 @@ group :development do
   gem 'rspec-rails', '~> 2.8.1'
   gem 'sqlite3', '1.3.5'
   gem 'annotate' 
+  gem "awesome_print"
 end
 
 # To use ActiveModel has_secure_password
