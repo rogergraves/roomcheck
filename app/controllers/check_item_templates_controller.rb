@@ -4,7 +4,7 @@ class CheckItemTemplatesController < ApplicationController
   # GET /check_item_templates
   # GET /check_item_templates.json
   def index
-    @check_item_templates = CheckItemTemplate.by_item_order.all
+    @check_item_templates = CheckItemTemplate.by_item_template_order.all
 
     respond_to do |format|
       format.html # index.html.erb
