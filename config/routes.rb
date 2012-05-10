@@ -16,6 +16,7 @@ Roomcheck::Application.routes.draw do
 
 #CHECKCHECK    We need to check the naming on the clone match and post.  
   match "check_item_templates_clone" => "check_item_templates#clone"
+  match "check_list_reverseclone" => "check_item_templates#reverseclone"
   post "check_list_clone" => "check_lists#clone"
   match "check_item_template" => "check_item_template#update"
 
