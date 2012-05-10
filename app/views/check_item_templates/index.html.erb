@@ -26,6 +26,14 @@
 			</tbody>
 		</table>
 		<%= submit_tag("Reorder Checks", :class => 'btn btn-primary btn-large', :id => 'submit') %>
+		<br />
+		<% if @checklists.count > 0 %>		
+		    <%= form_tag(check_list_reverseclone_path, :method => :post) do |f| %>
+		        Copy checks from room: 
+				<%= select_tag "clone_check_list_id", options_from_collection_for_select(@checklists, "id", "name") %>
+                <%= submit_tag "Copy" %>
+		    <% end %>
+    	<% end %>
 	<% end %>
 <% end %>
 

@@ -5,6 +5,7 @@ class CheckItemTemplatesController < ApplicationController
   # GET /check_item_templates.json
   def index
     @check_item_templates = CheckItemTemplate.by_item_order.all
+    @checklists = CheckList.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -86,18 +87,6 @@ class CheckItemTemplatesController < ApplicationController
     @check_item_template.update_attributes(params[:check_item_template]) ? redirect_to(check_item_templates_path, :notice => "Item Saved") : flash[:error]
   end
    
-   
-   
-  #   respond_to do |format|
-  #     if @check_item_template.update_attributes(params[:check_item_template])
-  #       format.html { redirect_to @check_item_template, notice: 'Check item template was successfully updated.' }
-  #       format.json { head :no_content }
-  #     else
-  #       format.html { render action: "edit" }
-  #       format.json { render json: @check_item_template.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
 
   # DELETE /check_item_templates/1
   # DELETE /check_item_templates/1.json
@@ -112,7 +101,7 @@ class CheckItemTemplatesController < ApplicationController
   end
   
   def clone
-    logger.info "CheckItemTemplatesController#clone CALLED: #{params[:check_list_id]}"
+    logger.info "\n\n!!!!!!!!!!!!!!!\nCheckItemTemplatesController#clone CALLED: #{params[:check_list_id]}\n!!!!!!!!!!!!!!!\n"
     if params[:check_list_id]
       @templates = CheckItemTemplate.all
       @templates.each do |template|
@@ -122,4 +111,9 @@ class CheckItemTemplatesController < ApplicationController
     end
     redirect_to check_list_path(params[:check_list_id])
   end
+  
+  def reverseclone
+    
+  end
+  
 end
