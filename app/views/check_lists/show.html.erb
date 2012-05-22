@@ -7,8 +7,13 @@ $(document).ready(function () {
 	if(qs.indexOf("#", 0) > 0) { // anchor tag is used
 		window.scrollBy(0,-40); // offset to take into account the nav bar
 	}
+	
 });
 
+function moveToTop(check_item_id) {
+	$("#check_item_"+check_item_id).val(".0000001");
+	return true;
+}
 
 
 </script>
@@ -23,34 +28,36 @@ $(document).ready(function () {
 
 <table id="CheckItemTable" class="table table-striped">
     <% if @checkitems.length > 0 %>
-		<%= form_tag(check_list_path, :method => "put", :name => "reorder") do %>
+		<%= form_tag(check_list_path, :method => "put", :name => "reorder", :id => "reorder") do %>
 			<%= hidden_field(:check_list_id, @checklist.id) %>
-			<% if @checkitems.length > 1 %>
-				<thead>
+				<% if @checkitems.length > 1 %>
+					<thead>
+						<tr>
+							<th></th>
+							<th>Order</th>
+							<th>Check</th>
+							<th>Status</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+				<% end %>
+				<tbody>
+				<% @checkitems.each do |check_item| %>
 					<tr>
-						<th>Order</th>
-						<th>Check</th>
-						<th>Status</th>
-						<th>Action</th>
+						<td><%= image_submit_tag("to_top_arrow.png", :onclick => "return moveToTop(#{check_item.id})")%></td>
+						<td><%= text_field(:check_item, check_item.id, {:value => check_item.item_order, :style => "width: 1.5em;"}) %></td>
+						<td><%= check_item.name %> (<%= check_item.area %>) <%= link_to "edit", edit_check_item_path(check_item), :class => "icon-pencil" %></td>
+						<td><%= describe_problem(check_item.id).html_safe %></td>
+						<td><%= link_to_problem(check_item.id).html_safe %></td>
 					</tr>
-				</thead>
-			<% end %>
-			<tbody>
-			<% @checkitems.each do |check_item| %>
+				<% end %>
+				</tbody>
 				<tr>
-					<td><%= text_field(:check_item, check_item.id, {:value => check_item.item_order, :style => "width: 1.5em;"}) %></td>
-					<td><%= check_item.name %> (<%= check_item.area %>) <%= link_to "edit", edit_check_item_path(check_item), :class => "icon-pencil" %></td>
-					<td><%= describe_problem(check_item.id).html_safe %></td>
-					<td><%= link_to_problem(check_item.id).html_safe %></td>
+					<td colspan="5">
+					<%= submit_tag("Reorder Checks", :class => 'btn btn-primary btn-large', :id => 'submit') %>
+					<%= link_to("Mark Unchecked as OK", results_path(:check_list_id => @checklist.id, :markasok => true), :method => "post", :class => "btn btn-warning btn-large") %>
+					</td>
 				</tr>
-			<% end %>
-			</tbody>
-			<tr>
-				<td colspan="4">
-				<%= submit_tag("Reorder Checks", :class => 'btn btn-primary btn-large', :id => 'submit') %>
-				<%= link_to("Mark Unchecked as OK", results_path(:check_list_id => @checklist.id, :markasok => true), :method => "post", :class => "btn btn-warning btn-large") %>
-				</td>
-			</tr>
 		<% end %>
 	<% end %>
 
