@@ -1,3 +1,13 @@
+<% content_for :head do %>
+<script langauge="javascript">
+function moveToTop(check_item_template_id) {
+	alert("check_item_template_"+check_item_template_id);
+	$("#check_item_template_"+check_item_template_id).val(".0000001");
+	return true;
+}
+</script>
+<% end %>
+
 <h1>Default Checks for New Rooms</h1>
 <p>All items can be added to any new room as a default template item</p>
 <p><%= link_to 'New Default Check', new_check_item_template_path, :class => "btn btn-primary" %></p>
@@ -7,6 +17,7 @@
 		<table id="CheckItemTemplateTable" class="table table-striped">
 			<thead>
 				<tr>
+					<th></th>
 					<th align="left">Order</th>
 					<th align="left">Check</th>
 					<th align="left">Action</td>
@@ -14,7 +25,8 @@
 			</thead>
 			<tbody>
 				<% @check_item_templates.each do |check_item_template| %>
-				   <tr id="<%=check_item_template.id%>">
+				   <tr>
+						<td><%= image_submit_tag("to_top_arrow.png", :onclick => "return moveToTop(#{check_item_template.id})") %></td>
 						<td><%= text_field(:check_item_template, check_item_template.id, {:value => check_item_template.item_order, :style => "width: 1.5em;"}) %></td>
 						<td><%= check_item_template.name %> (<%= check_item_template.area %>)</td>
 						<td>
@@ -26,15 +38,15 @@
 			</tbody>
 		</table>
 		<%= submit_tag("Reorder Checks", :class => 'btn btn-primary btn-large', :id => 'submit') %>
-		<br />
-		<% if @checklists.count > 0 %>		
-		    <%= form_tag(check_list_reverseclone_path, :method => :post) do |f| %>
-		        Copy checks from room: 
-				<%= select_tag "clone_check_list_id", options_from_collection_for_select(@checklists, "id", "name") %>
-                <%= submit_tag "Copy" %>
-		    <% end %>
-    	<% end %>
 	<% end %>
+	<br />	<br />
+	<% if @checklists.count > 0 %>		
+	    <%= form_tag(reverseclone_check_item_templates_path, :method => "put", :name => "reverseclone") do |f| %>
+	        Copy checks from room: 
+			<%= select_tag "clone_check_list_id", options_from_collection_for_select(@checklists, "id", "name") %>
+            <%= submit_tag "Copy", :class => "btn btn-warning" %>
+	    <% end %>
+   	<% end %>
 <% end %>
 
 

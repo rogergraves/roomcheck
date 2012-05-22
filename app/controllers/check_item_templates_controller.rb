@@ -113,7 +113,18 @@ class CheckItemTemplatesController < ApplicationController
   end
   
   def reverseclone
+    logger.info "\n\n!!!!!!!!!!!!!!!\\n#{params.inspect}\n!!!!!!!!!!!!!!!\n\n"
+    CheckItemTemplate.destroy_all
+    @check_list = CheckList.find(params[:clone_check_list_id])
+    @check_items = CheckItem.find_all_by_check_list_id(@check_list.id, :order => 'item_order')
     
+    @check_items.all do |check_item|
+      check_item_template = CheckItemTemplate.new(name: check_item.name, area: check_item.area, item_order: check_item.item_order)
+      check_item_template.save
+    end
+  
+    flash[:notice] = "Check items cloned from room #{@check_list.name}"
+    redirect_to check_item_templates_path
   end
   
 end
