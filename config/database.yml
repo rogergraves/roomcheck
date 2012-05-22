@@ -16,7 +16,6 @@ development:
     username: roomcheck
     password:
     host: localhost
-    port: 5432
       
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -34,7 +33,6 @@ test:
     username: roomcheck
     password:
     host: localhost
-    port: 5432
 
 
 # production:
