@@ -20,7 +20,12 @@ Roomcheck::Application.routes.draw do
   post "check_list_clone" => "check_lists#clone"
   match "check_item_template" => "check_item_template#update"
 
-  resources :results
+  resources :results do
+    collection do
+      get :markasok
+    end
+  end
+  
   resources :check_lists
   resources :check_items
   

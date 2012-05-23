@@ -9,9 +9,6 @@ class CheckItemsController < ApplicationController
   end
   
   def create
-    #@check_item = CheckItem.new(params[:check_item])
-    # list = CheckList.find_by_id(params[:check_list_id])
-    # check_item = list.check_items.build(params[:check_item])
     @check_item = CheckItem.new(params[:check_item])
     if @check_item.save 
       redirect_to(check_list_path(@check_item.check_list_id), :notice => "Item Saved") 
@@ -32,9 +29,6 @@ class CheckItemsController < ApplicationController
           area: @check_item.area,
         })
       end    
-      
-      
-      
     else
       flash[:error]
     end

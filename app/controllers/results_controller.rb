@@ -98,5 +98,8 @@ class ResultsController < ApplicationController
       redirect_to(check_lists_path)
     end
   end
+  def markasok
+    logger.info "\n\nResultsController#markasok\n!!!!!!!!!!!!!\nPARAMS: #{params.inspect}\n!!!!!!!!!!!!!!!!!\n\n"
+  end
 end
 
