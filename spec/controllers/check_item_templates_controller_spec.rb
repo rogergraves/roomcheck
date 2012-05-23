@@ -12,7 +12,9 @@ describe CheckItemTemplatesController do
       CheckItem.create!(name: "Sink", area: "Kitchen", check_list_id: check_list.id)
       CheckItem.create!(name: "Bed", area: "Main Room", check_list_id: check_list.id)
 
-      put :reverseclone, {clone_check_list_id: check_list.id}   
+      put :reverseclone, {clone_check_list_id: check_list.id}
+      
+         
     end
   end
 
