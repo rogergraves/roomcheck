@@ -12,7 +12,7 @@ module CheckListHelper
     elsif result && result.severity == 0
       return "Marked OK #{time_ago_in_words(result.updated_at)} ago"
     else
-      link_to("Mark OK", markasok_results_path(:check_item_id => check_item_id), :remote => true, :class => "btn btn-success", :name => "mark_ok_#{check_item_id}")
+      link_to("Mark OK", markasok_results_path(:check_item_id => check_item_id), :remote => true, :class => "btn btn-success")
     end   
     
   end

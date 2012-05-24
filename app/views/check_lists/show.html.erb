@@ -47,7 +47,8 @@ function moveToTop(check_item_id) {
 						<td><%= image_submit_tag("to_top_arrow.png", :onclick => "return moveToTop(#{check_item.id})")%></td>
 						<td><%= text_field(:check_item, check_item.id, {:value => check_item.item_order, :style => "width: 1.5em;"}) %></td>
 						<td><%= check_item.name %> (<%= check_item.area %>) <%= link_to "edit", edit_check_item_path(check_item), :class => "icon-pencil" %></td>
-						<td><%= describe_problem(check_item.id).html_safe %></td>
+						<!-- See http://stackoverflow.com/questions/10504625/link-to-and-remote-true-jquery-ajasuccess -->
+						<td><div id="mark-ok-check-item-id-<%= "#{check_item.id}" %>"><%= describe_problem(check_item.id).html_safe %></div></td>
 						<td><%= link_to_problem(check_item.id).html_safe %></td>
 					</tr>
 				<% end %>
