@@ -24,7 +24,7 @@ module CheckListHelper
       if result.severity > 0
         link_to("Edit", edit_result_path(:id => result.id), :class => "btn btn-info", :name => "check_item_#{check_item_id}")
       else
-        link_to("Not OK", edit_result_path(:id => result.id), :class => "btn btn-success", :name => "check_item_#{check_item_id}")
+        link_to("Not OK", edit_result_path(:id => result.id), :class => "btn btn-warning", :name => "check_item_#{check_item_id}")
       end
     else
       link_to("Not OK", new_result_path(:check_item_id => check_item_id), :class => "btn btn-warning", :name => "check_item_#{check_item_id}")

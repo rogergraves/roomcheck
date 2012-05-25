@@ -99,6 +99,10 @@ class ResultsController < ApplicationController
     end
   end
   def markasok
+    @check_item = CheckItem.find(params[:check_item_id])
+    @result = Result.new(check_item_id: @check_item.id, severity: 0)
+    @result.save
+    
     logger.info "\n\nResultsController#markasok\n!!!!!!!!!!!!!\nPARAMS: #{params.inspect}\n!!!!!!!!!!!!!!!!!\n\n"
   end
 end
