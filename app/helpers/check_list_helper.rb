@@ -13,7 +13,7 @@ module CheckListHelper
       return "Marked OK #{time_ago_in_words(result.updated_at)} ago"
     else
       link_to("Mark OK", markasok_results_path(:check_item_id => check_item_id), :remote => true, :class => "btn btn-success")
-    end   
+    end
     
   end
   
